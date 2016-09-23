@@ -1,0 +1,14 @@
+E:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\bin\Debug\Arquitetura.DTO.dll
+E:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\bin\Debug\Arquitetura.DTO.pdb
+E:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\bin\Debug\Arquitetura.Dominio.dll
+E:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\bin\Debug\Arquitetura.Dominio.pdb
+E:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\obj\Debug\Arquitetura.DTO.csprojResolveAssemblyReference.cache
+E:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\obj\Debug\Arquitetura.DTO.dll
+E:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\obj\Debug\Arquitetura.DTO.pdb
+D:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\bin\Debug\Arquitetura.DTO.dll
+D:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\bin\Debug\Arquitetura.DTO.pdb
+D:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\bin\Debug\Arquitetura.Dominio.dll
+D:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\bin\Debug\Arquitetura.Dominio.pdb
+D:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\obj\Debug\Arquitetura.DTO.csprojResolveAssemblyReference.cache
+D:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\obj\Debug\Arquitetura.DTO.dll
+D:\Projects\ContaCRM\ConttaCRM\Arquitetura.DTO\obj\Debug\Arquitetura.DTO.pdb

@@ -1,0 +1,283 @@
+﻿@model EntrevistaDTO
+
+@{
+    var addEdit = Model.Id == 0 ? "Adicionar" : "Editar";
+}
+
+<h1 class="page-title txt-color-blueDark">
+
+    <!-- PAGE HEADER -->
+    <i class="fa-fw fa fa-edit"></i>
+    Entrevista
+    <span>
+        >
+        @addEdit
+    </span>
+</h1>
+
+@Html.Partial("_Mensagens")
+
+<div class="box-content">
+
+    @using (Ajax.BeginForm("POSTEditar", "Entrevista", new AjaxOptions { UpdateTargetId = "page-content", InsertionMode = InsertionMode.Replace, HttpMethod = "Post", OnFailure = "OnFailure", OnSuccess = "OnSuccess" }, new { @class = "smart-form" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id);
+        @Html.HiddenFor(model => model.ResponsalvelId);
+
+        <fieldset>
+            <legend>Tipos de Aberturas</legend>
+            <div class="row">
+                <div class="alert alert-info alert-block">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <p>Para realizar a abetura são necessárias as cópias dos seguintes documentos:</p>
+                    <p><i class="fa fa-share"></i> Três cópias autenticadas do RG;</p>
+                    <p><i class="fa fa-share"></i> Três cópias autenticadas do CPF;</p>
+                    <p><i class="fa fa-share"></i> Três cópias autenticadas do comprovante de endereço (máximo 3 meses de emissão);</p>
+                    <p><i class="fa fa-share"></i> Três cópias autenticadas da CNH;</p>
+                    <p><i class="fa fa-share"></i> Três cópias autenticadas da certidão de casamento (se casado).</p>
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <div class="row">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(model => model.CopiaRg) Três cópias autenticadas do RG
+                    <i></i>
+                </label>
+            </div>
+            <div class="row">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(model => model.CopiaCpf) Três cópias autenticadas do CPF
+                    <i></i>
+                </label>
+            </div>
+            <div class="row">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(model => model.CopiaEndereco) Três cópias autenticadas do comprovante de endereço (máximo 3 meses de emissão)
+                    <i></i>
+                </label>
+            </div>
+            <div class="row">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(model => model.CopiaCnh) Três cópias autenticadas da CNH
+                    <i></i>
+                </label>
+            </div>
+            <div class="row">
+                <label class="checkbox">
+                    @Html.CheckBoxFor(model => model.CopiaCasamento) Três cópias autenticadas da certidão de casamento (se casado)
+                    <i></i>
+                </label>
+            </div>
+
+        </fieldset>
+
+        <fieldset>
+            <legend>Dados empresa</legend>
+            <div class="row">
+                <section class="col col-6">
+                    <label for="NomeDaEmpresa1" class="label obrigatorio">Primeiro Nome da Empresa</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.NomeDaEmpresa1)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.NomeDaEmpresa1)
+                </section>
+                <section class="col col-6">
+                    <label for="NomeDaEmpresa2" class="label">Segundo Nome da Empresa</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.NomeDaEmpresa2)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.NomeDaEmpresa2)
+                </section>
+            </div>
+            <div class="row">
+                <section class="col col-6">
+                    <label for="NomeDaEmpresa3" class="label">Terceiro Nome da Empresa</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.NomeDaEmpresa3)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.NomeDaEmpresa3)
+                </section>
+                <section class="col col-6">
+                    <label for="NomeFantasia" class="label obrigatorio">Nome Fantasia da Empresa</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.NomeFantasia)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.NomeFantasia)
+                </section>
+            </div>
+            <div class="row">
+                <section class="col col-6">
+                    <label for="CapitalSocial" class="label obrigatorio">Capital Social</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.CapitalSocial)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.CapitalSocial)
+                </section>
+                <section class="col col-6">
+                    <label for="Metragem" class="label obrigatorio">Metragem</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Metragem)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Metragem)
+                </section>
+            </div>
+            <div class="row">
+                <section class="col col-6">
+                    <label for="Iptu" class="label">IPTU</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Iptu, new { @class = "somentenumeros" })
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Iptu)
+                </section>
+                <section class="col col-6">
+                    <label for="PontoDeReferencia" class="label">Ponto de Referência</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.PontoDeReferencia)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.PontoDeReferencia)
+                </section>
+            </div>
+            <div class="row">
+                <section class="col col-6">
+                    <label for="Telefone" class="label obrigatorio">Telefone</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-phone"></i>
+                        @Html.TextBoxFor(model => model.Telefone, new { @class = "telefone" })
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Telefone)
+                </section>
+                <section class="col col-6">
+                    <label for="Email" class="label obrigatorio">E-mail</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-envelope"></i>
+                        @Html.TextBoxFor(model => model.Email)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Email)
+                </section>
+            </div>
+            <div class="row">
+                <section class="col col-4">
+                    <label for="LivroRegistroEmpregados" class="label">Livro de Registro de Empregados</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.LivroRegistroEmpregados)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.LivroRegistroEmpregados)
+                </section>
+                <section class="col col-4">
+                    <label for="InspencaoTrabalho" class="label">Inspeção de Trabalho</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.InspencaoTrabalho)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.InspencaoTrabalho)
+                </section>
+                <section class="col col-4">
+                    <label for="LivroTermoOcorrencia" class="label">Livro Termo de Ocorrência</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.LivroTermoOcorrencia)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.LivroTermoOcorrencia)
+                </section>
+            </div>
+            <div>
+                <section>
+                    <label for="Objetivo" class="label obrigatorio">Objetivo</label>
+                    <label class="textarea">
+                        @Html.TextAreaFor(model => model.Objetivo, new { @class = "custom-scroll", @rows = "5" })
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Objetivo)
+                </section>
+            </div>
+        </fieldset>
+
+
+        //Aqui
+        <fieldset>
+            <legend></legend>
+            <ul id="myTab1" class="nav nav-tabs bordered">
+
+                <li class="active">
+                    @if (@Model.Id > 0)
+                {
+                        <a href="#s1" data-toggle="tab">Sócios <span class="badge bg-color-blue txt-color-white">@Model.ListaDeSocios.Count.ToString()</span></a>
+                    }
+                    else
+                    {
+                        <a href="#s1" data-toggle="tab">Sócios <span class="badge bg-color-red txt-color-white">0</span></a>
+                    }
+
+                </li>
+
+                <li class="pull-right">
+                    <a href="javascript:void(0);">
+                        <div class="sparkline txt-color-pinkDark text-align-right" data-sparkline-height="18px" data-sparkline-width="90px" data-sparkline-barwidth="7">
+                            <canvas width="52" height="18" style="display: inline-block; width: 52px; height: 18px; vertical-align: top;"></canvas>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
+            <div id="myTabContent1" class="tab-content padding-10">
+                <div class="tab-pane fade in active" id="s1">
+                    <footer>
+                        @if (@Model.Id > 0)
+                        {
+                            <button type="button" class="btn btn-primary" onclick="carregarPaginaAjax('@Url.Action("Editar", "Socio", new { idEntrevista = @Model.Id })')"><i class="fa fa-plus"></i> Adicionar</button>
+                        }
+                    </footer>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-striped table-condensed table-hover smart-form table-row-link" id="gridSocios">
+                            <thead>
+                                <tr>
+                                    <td><strong>Nome</strong></td>
+                                    <td><strong>CPF</strong></td>
+                                    <td><strong>Sexo</strong></td>
+                                    <td><strong>Estado Civil</strong></td>
+                                    <td><strong>Telefone</strong></td>
+                                    <td><strong>Celular</strong></td>
+                                    <td><strong>E-mail</strong></td>
+                                </tr>
+                            </thead>
+                            @if (@Model.Id > 0)
+                            {
+                                if (Model.ListaDeSocios.Count > 0)
+                                {
+                                    foreach (var lista in Model.ListaDeSocios)
+                                    {
+                                        <tr>
+                                            <td data-id="@lista.Id">@lista.Nome</td>
+                                            <td>@lista.Cpf</td>
+                                            <td>@lista.Sexo</td>
+                                            <td>@Util.GetEnumDescription(lista.EstadoCivil)</td>
+                                            <td>@lista.Telefone</td>
+                                            <td>@lista.Celular</td>
+                                            <td>@lista.Email</td>
+                                        </tr>
+                                    }
+                                }
+                            }
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+
+        <footer>
+            <button type="submit" class="btn btn-primary btn-submit" data-loading-text="Salvando..."><i class="fa fa-save"></i> Salvar</button>
+            <a href="javascript:;" class="btn btn-default" onclick="carregarPaginaAjax('@Url.Action("Index", "Constituicao", new { responsavelId = (int)Session["ResponsavelId"]})')"><i class="fa fa-arrow-left"></i> Voltar</a>
+        </footer>
+    }
+
+</div>
+<script src="@Url.Content("~/Scripts/views/entrevistaEditar.js")" type="text/javascript"></script>
+<script>
+    $("#gridSocios").on('click', 'tbody tr', function (e) {
+        debugger;
+        var id = $(e.currentTarget).children().first().data("id");
+        var url = '/Socio/Editar?id=' + id;
+        carregarPaginaAjax(url);
+    });
+</script>

@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arquitetura.Web", "Arquitetura.Web\Arquitetura.Web.csproj", "{BCB7E2D6-C383-4D99-B6EF-12AF7927A740}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arquitetura.Dominio", "Arquitetura.Dominio\Arquitetura.Dominio.csproj", "{E0E8575F-7FFA-4746-B851-C768F432607A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arquitetura.Aplicacao", "Arquitetura.Aplicacao\Arquitetura.Aplicacao.csproj", "{502B921E-E704-4A32-8256-02E47871B1CD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arquitetura.Infraestrutura", "Arquitetura.Infraestrutura\Arquitetura.Infraestrutura.csproj", "{CDD57639-A7CA-45F9-AA06-19FC33E074C7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arquitetura.DTO", "Arquitetura.DTO\Arquitetura.DTO.csproj", "{B163111F-E6CC-40E4-9201-6DAA2B134A6C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{1B0277FF-1ACF-495F-BC29-0D5EF8D6A142}"
+	ProjectSection(SolutionItems) = preProject
+		.nuget\NuGet.Config = .nuget\NuGet.Config
+		.nuget\NuGet.exe = .nuget\NuGet.exe
+		.nuget\NuGet.targets = .nuget\NuGet.targets
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E1C93842-837B-4DF1-A66E-30CE3C0FC15E}"
+	ProjectSection(SolutionItems) = preProject
+		WebEssentials2015-Settings.json = WebEssentials2015-Settings.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BCB7E2D6-C383-4D99-B6EF-12AF7927A740}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCB7E2D6-C383-4D99-B6EF-12AF7927A740}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCB7E2D6-C383-4D99-B6EF-12AF7927A740}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCB7E2D6-C383-4D99-B6EF-12AF7927A740}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E0E8575F-7FFA-4746-B851-C768F432607A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E0E8575F-7FFA-4746-B851-C768F432607A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E0E8575F-7FFA-4746-B851-C768F432607A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E0E8575F-7FFA-4746-B851-C768F432607A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{502B921E-E704-4A32-8256-02E47871B1CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{502B921E-E704-4A32-8256-02E47871B1CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{502B921E-E704-4A32-8256-02E47871B1CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{502B921E-E704-4A32-8256-02E47871B1CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CDD57639-A7CA-45F9-AA06-19FC33E074C7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CDD57639-A7CA-45F9-AA06-19FC33E074C7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CDD57639-A7CA-45F9-AA06-19FC33E074C7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CDD57639-A7CA-45F9-AA06-19FC33E074C7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B163111F-E6CC-40E4-9201-6DAA2B134A6C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B163111F-E6CC-40E4-9201-6DAA2B134A6C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B163111F-E6CC-40E4-9201-6DAA2B134A6C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B163111F-E6CC-40E4-9201-6DAA2B134A6C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 6
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = https://conttacrm.visualstudio.com/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Arquitetura.Aplicacao\\Arquitetura.Aplicacao.csproj
+		SccProjectName1 = Arquitetura.Aplicacao
+		SccLocalPath1 = Arquitetura.Aplicacao
+		SccProjectUniqueName2 = Arquitetura.Dominio\\Arquitetura.Dominio.csproj
+		SccProjectName2 = Arquitetura.Dominio
+		SccLocalPath2 = Arquitetura.Dominio
+		SccProjectUniqueName3 = Arquitetura.DTO\\Arquitetura.DTO.csproj
+		SccProjectName3 = Arquitetura.DTO
+		SccLocalPath3 = Arquitetura.DTO
+		SccProjectUniqueName4 = Arquitetura.Infraestrutura\\Arquitetura.Infraestrutura.csproj
+		SccProjectName4 = Arquitetura.Infraestrutura
+		SccLocalPath4 = Arquitetura.Infraestrutura
+		SccProjectUniqueName5 = Arquitetura.Web\\Arquitetura.Web.csproj
+		SccProjectName5 = Arquitetura.Web
+		SccLocalPath5 = Arquitetura.Web
+	EndGlobalSection
+EndGlobal

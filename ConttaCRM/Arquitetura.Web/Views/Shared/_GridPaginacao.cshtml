@@ -1,0 +1,112 @@
+﻿@{
+    string classPaginacao;
+    if (Model.DesabilitarTotalizador)
+    {
+        classPaginacao = string.Empty;
+    }
+    else
+    {
+        classPaginacao = "col-xs-12 col-sm-6";
+    }
+}
+
+<div class="dt-toolbar-footer">
+    @if (Model.TotalRecords > 0)
+    {
+        if (!Model.DesabilitarTotalizador)
+        {
+            <div class="col-sm-6 col-xs-12 hidden-xs">
+                <div class="dataTables_info" id="datatable_fixed_column_info" role="status" aria-live="polite">
+                    Mostrando <span class="txt-color-darken">@((Model.PageSize * Model.Page) - Model.PageSize + 1)</span> até <span class="txt-color-darken">@((Model.PageSize * Model.Page) - Model.PageSize + Model.Entities.Count)</span> de <span class="text-primary">@Model.TotalRecords</span> registros
+                </div>
+            </div>
+        }
+        <div class="@classPaginacao">
+            <div class="dataTables_paginate paging_simple_numbers" id="datatable_fixed_column_paginate">
+                <ul class="pagination pagination-sm">
+                    <li class="paginate_button previous @(Model.HasPrevious ? "" : "disabled")" aria-controls="datatable_fixed_column" tabindex="0" id="datatable_fixed_column_previous">
+                        <a href="javascript:;" @(Model.HasPrevious ? Html.Raw("onclick=$('#" + Model.GridId + "').load('" + Url.Action(Model.Action, Model.Controller, new { page = Model.PreviousPage, sortdir = Model.Sortdir, sort = Model.Sort, searchTerm = Model.SearchTerm, pageSize = Model.PageSize, adicional = Model.Adicional }) + "',function(){" + Model.ExecutarScripts + "})") : "")>Anterior</a>
+                    </li>
+                    @if (Model.TotalPage <= 8)
+                    {
+                        for (int cont = 1; cont <= Model.TotalPage; cont++)
+                        {
+                            <li class="paginate_button @(Model.Page == cont ? "active" : "")" aria-controls="datatable_fixed_column">
+                                <a href="javascript:;" @(Model.Page != cont ? "onclick=$('#" + Model.GridId + "').load('" + Url.Action(Model.Action, Model.Controller, new { page = cont, sortdir = Model.Sortdir, sort = Model.Sort, searchTerm = Model.SearchTerm, pageSize = Model.PageSize, adicional = Model.Adicional }) + "',function(){" + Model.ExecutarScripts + "})" : "")>@cont</a>
+                            </li>
+                        }
+                    }
+                    else if (Model.Page <= 4)
+                    {
+                        for (int cont = 1; cont <= 5; cont++)
+                        {
+                            <li class="paginate_button @(Model.Page == cont ? "active" : "")" aria-controls="datatable_fixed_column">
+                                <a href="javascript:;" @(Model.Page != cont ? "onclick=$('#" + Model.GridId + "').load('" + Url.Action(Model.Action, Model.Controller, new { page = cont, sortdir = Model.Sortdir, sort = Model.Sort, searchTerm = Model.SearchTerm, pageSize = Model.PageSize, adicional = Model.Adicional }) + "',function(){" + Model.ExecutarScripts + "})" : "")>@cont</a>
+                            </li>
+                        }
+                        <li class="paginate_button disabled" aria-controls="datatable_fixed_column">
+                            <a href="javascript:;">...</a>
+                        </li>
+                        <li class="paginate_button" aria-controls="datatable_fixed_column">
+                            <a href="javascript:;" @("onclick=$('#" + Model.GridId + "').load('" + Url.Action(Model.Action, Model.Controller, new { page = Model.TotalPage, sortdir = Model.Sortdir, sort = Model.Sort, searchTerm = Model.SearchTerm, pageSize = Model.PageSize, adicional = Model.Adicional }) + "',function(){" + Model.ExecutarScripts + "})")>@Model.TotalPage</a>
+                        </li>
+                    }
+                    else if (Model.Page > 4 && Model.Page <= Model.TotalPage - 4)
+                    {
+                        <li class="paginate_button" aria-controls="datatable_fixed_column">
+                            <a href="javascript:;" @("onclick=$('#" + Model.GridId + "').load('" + Url.Action(Model.Action, Model.Controller, new { page = 1, sortdir = Model.Sortdir, sort = Model.Sort, searchTerm = Model.SearchTerm, pageSize = Model.PageSize, adicional = Model.Adicional }) + "',function(){" + Model.ExecutarScripts + "})")>1</a>
+                        </li>
+                        <li class="paginate_button disabled" aria-controls="datatable_fixed_column">
+                            <a href="javascript:;">...</a>
+                        </li>
+                        <li class="paginate_button" aria-controls="datatable_fixed_column">
+                            <a href="javascript:;" @("onclick=$('#" + Model.GridId + "').load('" + Url.Action(Model.Action, Model.Controller, new { page = Model.Page - 1, sortdir = Model.Sortdir, sort = Model.Sort, searchTerm = Model.SearchTerm, pageSize = Model.PageSize, adicional = Model.Adicional }) + "',function(){" + Model.ExecutarScripts + "})")>@(Model.Page - 1)</a>
+                        </li>
+                        <li class="paginate_button active" aria-controls="datatable_fixed_column">
+                            <a href="javascript:;" @("onclick=$('#" + Model.GridId + "').load('" + Url.Action(Model.Action, Model.Controller, new { page = Model.Page, sortdir = Model.Sortdir, sort = Model.Sort, searchTerm = Model.SearchTerm, pageSize = Model.PageSize, adicional = Model.Adicional }) + "',function(){" + Model.ExecutarScripts + "})")>@(Model.Page)</a>
+                        </li>
+                        <li class="paginate_button" aria-controls="datatable_fixed_column">
+                            <a href="javascript:;" @("onclick=$('#" + Model.GridId + "').load('" + Url.Action(Model.Action, Model.Controller, new { page = Model.Page + 1, sortdir = Model.Sortdir, sort = Model.Sort, searchTerm = Model.SearchTerm, pageSize = Model.PageSize, adicional = Model.Adicional }) + "',function(){" + Model.ExecutarScripts + "})")>@(Model.Page + 1)</a>
+                        </li>
+                        <li class="paginate_button disabled" aria-controls="datatable_fixed_column">
+                            <a href="javascript:;">...</a>
+                        </li>
+                        <li class="paginate_button" aria-controls="datatable_fixed_column">
+                            <a href="javascript:;" @("onclick=$('#" + Model.GridId + "').load('" + Url.Action(Model.Action, Model.Controller, new { page = Model.TotalPage, sortdir = Model.Sortdir, sort = Model.Sort, searchTerm = Model.SearchTerm, pageSize = Model.PageSize, adicional = Model.Adicional }) + "',function(){" + Model.ExecutarScripts + "})")>@Model.TotalPage</a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="paginate_button" aria-controls="datatable_fixed_column">
+                            <a href="javascript:;" @("onclick=$('#" + Model.GridId + "').load('" + Url.Action(Model.Action, Model.Controller, new { page = 1, sortdir = Model.Sortdir, sort = Model.Sort, searchTerm = Model.SearchTerm, pageSize = Model.PageSize, adicional = Model.Adicional }) + "',function(){" + Model.ExecutarScripts + "})")>1</a>
+                        </li>
+                        <li class="paginate_button disabled" aria-controls="datatable_fixed_column">
+                            <a href="javascript:;">...</a>
+                        </li>
+                        for (int cont = Model.TotalPage - 4; cont <= Model.TotalPage; cont++)
+                        {
+                            <li class="paginate_button @(Model.Page == cont ? "active" : "")" aria-controls="datatable_fixed_column">
+                                <a href="javascript:;" @(Model.Page != cont ? "onclick=$('#" + Model.GridId + "').load('" + Url.Action(Model.Action, Model.Controller, new { page = cont, sortdir = Model.Sortdir, sort = Model.Sort, searchTerm = Model.SearchTerm, pageSize = Model.PageSize, adicional = Model.Adicional }) + "',function(){" + Model.ExecutarScripts + "})" : "")>@cont</a>
+                            </li>
+                        }
+                    }
+                    <li class="paginate_button next @(Model.HasNext ? "" : "disabled")" aria-controls="datatable_fixed_column" tabindex="0" id="datatable_fixed_column_next">
+                        <a href="javascript:;" @(Model.HasNext ? "onclick=$('#" + Model.GridId + "').load('" + Url.Action(Model.Action, Model.Controller, new { page = Model.NextPage, sortdir = Model.Sortdir, sort = Model.Sort, searchTerm = Model.SearchTerm, pageSize = Model.PageSize, adicional = Model.Adicional }) + "',function(){" + Model.ExecutarScripts + "})" : "")>Próxima</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="empty-grid">
+            &lt;Nenhum resultado&gt;
+        </div>
+    }
+</div>
+@*
+    <script src="@Url.Content("~/Scripts/gridRowClick.js")" type="text/javascript"></script>
+*@
+<script type="text/javascript">
+    onGridLoadCallBack('@Model.GridId');
+</script>

@@ -1,0 +1,325 @@
+﻿@Html.Partial("_Mensagens")
+
+<h1 class="page-title txt-color-blueDark">
+
+    <!-- PAGE HEADER -->
+    <i class="fa-fw fa fa-building"></i>
+    Abertura
+    @*<script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>*@
+ 
+
+    @*<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+    <script src="@Url.Content("~/Content/SmartAdmin/js/smartwidgets/jarvis.widget.min.js")"></script>*@
+</h1>
+
+<div class="box-content">
+
+    @using (Ajax.BeginForm("Index", "Constituicao", new AjaxOptions { UpdateTargetId = "grid-partial", InsertionMode = InsertionMode.Replace, HttpMethod = "Post", OnFailure = "OnFailure" }, new { id = "searchForm" }))
+    {
+        @Html.Hidden("ResponsalvelId");
+        <div class="row">
+            <section class="col col-lg-4">
+                <div role="content">
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body">
+                        <div class="tree">
+                            <ul role="tree">
+                                <li class="parent_li" role="treeitem">
+                                    <span title="Collapse this branch"><i class="fa fa-lg fa-calendar"></i> Dezembro 2015</span>
+                                    <ul role="group">
+                                        <li class="parent_li" role="treeitem">
+                                            <span class="label label-success" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> Responsável</span>
+                                            <ul role="group">
+                                                <li style="display: list-item;">
+                                                    <span><i class="fa fa-clock-o"></i> @ViewBag.Data</span> – <a href="javascript:;" onclick="carregarPaginaAjax('@Url.Action("Editar", "Responsavel", new { id = (int)Session["ResponsavelId"]})')">@ViewBag.ResponsavelNome</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="parent_li" role="treeitem">
+                                            <span class="label label-success" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> Entrevista</span>
+                                            <ul role="group">
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i> @ViewBag.DataEntrevista</span> – <a href="javascript:void(0);" onclick="functionEntrevista()">A Entrevista</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="parent_li" role="treeitem">
+                                            <span class="label label-warning" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> Número oficial</span>
+                                            <ul role="group">
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i> @ViewBag.DataNumeroOficial</span> – <a href="javascript:abrir('http://www.goiania.go.gov.br/sistemas/saces/asp/saces00000f0.asp?sigla=sinpo&prog=sinpo00100f0.asp');">Solicitar número oficial </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="parent_li" role="treeitem">
+                                            <span class="label label-danger" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> Uso de solo</span>
+                                            <ul role="group">
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i>@ViewBag.UsoSolo</span> – <a href="javascript:void(0);" onclick="functionUsoSolo()">Solicitar Uso de Solo</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="parent_li" role="treeitem">
+                                    <span title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> 2013, Week 3</span>
+                                    <ul role="group">
+                                        <li class="parent_li" role="treeitem" style="display: list-item;">
+                                            <span class="label label-success" title="Expand this branch"><i class="fa fa-lg fa-plus-circle"></i> Monday, January 14: 8.00 hours</span>
+                                            <ul role="group">
+                                                <li style="display: none;">
+                                                    <span><i class="fa fa-clock-o"></i> 7.75</span> – <a href="javascript:void(0);">Writing documentation...</a>
+                                                </li>
+                                                <li style="display: none;">
+                                                    <span><i class="fa fa-clock-o"></i> 0.25</span> – <a href="javascript:void(0);">Reverting code back to...</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+            </section>
+            <section class="col col-lg-4">
+                <div role="content">
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body">
+                        <div class="tree">
+                            <ul role="tree">
+                                <li class="parent_li" role="treeitem">
+                                    <span title="Collapse this branch"><i class="fa fa-lg fa-calendar"></i> 2013, Week 2</span>
+                                    <ul role="group">
+                                        <li class="parent_li" role="treeitem">
+                                            <span class="label label-success" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> Monday, January 7: 8.00 hours</span>
+                                            <ul role="group">
+                                                <li style="display: list-item;">
+                                                    <span><i class="fa fa-clock-o"></i> 8.00</span> – <a href="javascript:void(0);">Changed CSS to accomodate...</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="parent_li" role="treeitem">
+                                            <span class="label label-success" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> Tuesday, January 8: 8.00 hours</span>
+                                            <ul role="group">
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i> 6.00</span> – <a href="javascript:void(0);">Altered code...</a>
+                                                </li>
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i> 2.00</span> – <a href="javascript:void(0);">Simplified our approach to...</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="parent_li" role="treeitem">
+                                            <span class="label label-warning" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> Wednesday, January 9: 6.00 hours</span>
+                                            <ul role="group">
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i> 3.00</span> – <a href="javascript:void(0);">Fixed bug caused by...</a>
+                                                </li>
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i> 3.00</span> – <a href="javascript:void(0);">Comitting latest code to Git...</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="parent_li" role="treeitem">
+                                            <span class="label label-danger" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> Wednesday, January 9: 4.00 hours</span>
+                                            <ul role="group">
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i> 2.00</span> – <a href="javascript:void(0);">Create component that...</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="parent_li" role="treeitem">
+                                    <span title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> 2013, Week 3</span>
+                                    <ul role="group">
+                                        <li class="parent_li" role="treeitem" style="display: list-item;">
+                                            <span class="label label-success" title="Expand this branch"><i class="fa fa-lg fa-plus-circle"></i> Monday, January 14: 8.00 hours</span>
+                                            <ul role="group">
+                                                <li style="display: none;">
+                                                    <span><i class="fa fa-clock-o"></i> 7.75</span> – <a href="javascript:void(0);">Writing documentation...</a>
+                                                </li>
+                                                <li style="display: none;">
+                                                    <span><i class="fa fa-clock-o"></i> 0.25</span> – <a href="javascript:void(0);">Reverting code back to...</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+            </section>
+            <section class="col col-lg-4">
+                <div role="content">
+
+                    <!-- widget edit box -->
+                    <div class="jarviswidget-editbox">
+                        <!-- This area used as dropdown edit box -->
+
+                    </div>
+                    <!-- end widget edit box -->
+                    <!-- widget content -->
+                    <div class="widget-body">
+                        <div class="tree">
+                            <ul role="tree">
+                                <li class="parent_li" role="treeitem">
+                                    <span title="Collapse this branch"><i class="fa fa-lg fa-calendar"></i> 2013, Week 2</span>
+                                    <ul role="group">
+                                        <li class="parent_li" role="treeitem">
+                                            <span class="label label-success" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> Monday, January 7: 8.00 hours</span>
+                                            <ul role="group">
+                                                <li style="display: list-item;">
+                                                    <span><i class="fa fa-clock-o"></i> 8.00</span> – <a href="javascript:void(0);">Changed CSS to accomodate...</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="parent_li" role="treeitem">
+                                            <span class="label label-success" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> Tuesday, January 8: 8.00 hours</span>
+                                            <ul role="group">
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i> 6.00</span> – <a href="javascript:void(0);">Altered code...</a>
+                                                </li>
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i> 2.00</span> – <a href="javascript:void(0);">Simplified our approach to...</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="parent_li" role="treeitem">
+                                            <span class="label label-warning" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> Wednesday, January 9: 6.00 hours</span>
+                                            <ul role="group">
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i> 3.00</span> – <a href="javascript:void(0);">Fixed bug caused by...</a>
+                                                </li>
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i> 3.00</span> – <a href="javascript:void(0);">Comitting latest code to Git...</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="parent_li" role="treeitem">
+                                            <span class="label label-danger" title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> Wednesday, January 9: 4.00 hours</span>
+                                            <ul role="group">
+                                                <li>
+                                                    <span><i class="fa fa-clock-o"></i> 2.00</span> – <a href="javascript:void(0);">Create component that...</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="parent_li" role="treeitem">
+                                    <span title="Collapse this branch"><i class="fa fa-lg fa-minus-circle"></i> 2013, Week 3</span>
+                                    <ul role="group">
+                                        <li class="parent_li" role="treeitem" style="display: list-item;">
+                                            <span class="label label-success" title="Expand this branch"><i class="fa fa-lg fa-plus-circle"></i> Monday, January 14: 8.00 hours</span>
+                                            <ul role="group">
+                                                <li style="display: none;">
+                                                    <span><i class="fa fa-clock-o"></i> 7.75</span> – <a href="javascript:void(0);">Writing documentation...</a>
+                                                </li>
+                                                <li style="display: none;">
+                                                    <span><i class="fa fa-clock-o"></i> 0.25</span> – <a href="javascript:void(0);">Reverting code back to...</a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <!-- end widget content -->
+
+                </div>
+            </section>
+        </div>
+    }
+</div>
+<script src="@Url.Content("~/Scripts/views/constituicaoIndex.js")" type="text/javascript"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+
+			pageSetUp();
+
+			// scripts dessa página
+
+			$('.tree > ul').attr('role', 'tree').find('ul').attr('role', 'group');
+			$('.tree').find('li:has(ul)').addClass('parent_li').attr('role', 'treeitem').find(' > span').attr('title', 'Collapse this branch').on('click', function(e) {
+				var children = $(this).parent('li.parent_li').find(' > ul > li');
+				if (children.is(':visible')) {
+					children.hide('fast');
+					$(this).attr('title', 'Expand this branch').find(' > i').removeClass().addClass('fa fa-lg fa-plus-circle');
+				} else {
+					children.show('fast');
+					$(this).attr('title', 'Collapse this branch').find(' > i').removeClass().addClass('fa fa-lg fa-minus-circle');
+				}
+				e.stopPropagation();
+			});
+
+		})
+</script>
+
+<!-- GOOGLE ANALYTICS CODE -->
+<script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-XXXXXXXX-X']);
+    _gaq.push(['_trackPageview']);
+
+    (function () {
+        var ga = document.createElement('script');
+        ga.type = 'text/javascript';
+        ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(ga, s);
+    })();
+
+</script>
+
+<script type="text/javascript">
+    var functionEntrevista = function () {
+        var id = $("#ResponsalvelId").val();
+        //debugger;
+        carregarPaginaAjax('/Entrevista/Editar?responsavelId=' + id);
+    };
+    var functionNumeroOficial = function () {
+        var responsavelId = $("#ResponsalvelId").val();
+        //debugger;
+        carregarPaginaAjax('/NumeroOficial/Editar');
+    };
+    var functionUsoSolo = function () {
+        var responsavelId = $("#ResponsalvelId").val();
+        //debugger;
+        carregarPaginaAjax('/UsoSolo/Editar');
+    };
+    function abrir(URL) {
+        var width = 800;
+        var height = 500;
+        var left = 600;
+
+        window.open(URL, 'janela', 'width=' + width + ', height=' + height + ', left= ' + left + ', scrollbars=yes, status=no, toolbar=no, location=no, directories=no, menubar=no, resizable=no, fullscreen=no');
+    }
+</script>
+

@@ -1,0 +1,982 @@
+﻿@model ResponsavelDTO
+
+@{
+    var addEdit = Model.Id == 0 ? "Adicionar" : "Editar";
+    var listaDeFiliais = (List<ResponsavelListDTO>)ViewBag.Filial;
+}
+
+<h1 class="page-title txt-color-blueDark">
+
+    <!-- PAGE HEADER -->
+    <i class="fa-fw fa fa-edit"></i>
+    Responsável
+    <span>
+        >
+        @addEdit
+    </span>
+</h1>
+
+@Html.Partial("_Mensagens")
+
+<div class="box-content">
+
+    @using (Ajax.BeginForm("POSTEditar", "Responsavel", new AjaxOptions { UpdateTargetId = "page-content", InsertionMode = InsertionMode.Replace, HttpMethod = "Post", OnFailure = "OnFailure", OnSuccess = "OnSuccess" }, new { @class = "smart-form" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id);
+
+        if (Model.Id <= 0)
+        {
+            <fieldset id="show">
+                <legend>Tipos de Aberturas</legend>
+                <div class="row">
+                    <div class="col col-3" id="empreendedorIndividual" style="cursor: pointer;">
+                        <img src="~/Content/img/op_empreendedor_individual.png" />
+                    </div>
+                    <div class="col col-3" id="empresarioIndividual" style="cursor: pointer;">
+                        <img src="~/Content/img/op_empresario_individual.png" />
+                    </div>
+                    <div class="col col-3" id="sociedadeLimitada" style="cursor: pointer;">
+                        <img src="~/Content/img/op_sociedade_limitada.png" />
+                    </div>
+                    <div class="col col-3" id="eireli" style="cursor: pointer;">
+                        <img src="~/Content/img/op_eireli.png" />
+                    </div>
+                </div>
+                <div class="row"><br /></div>
+                <div class="row">
+                    <div class="col col-3" id="consorsio" style="cursor: pointer;">
+                        <img src="~/Content/img/op_consorcio.png" />
+                    </div>
+                    <div class="col col-3" id="cooperativa" style="cursor: pointer;">
+                        <img src="~/Content/img/op_cooperativa.png" />
+                    </div>
+                    <div class="col col-3" id="sociedadeAnonima" style="cursor: pointer;">
+                        <img src="~/Content/img/op_sociedade_anonima.png" />
+                    </div>
+                    <div class="col col-3" id="outrosTiposJuridicos" style="cursor: pointer;">
+                        <img src="~/Content/img/op_outros_tipos_juridicos.png" />
+                    </div>
+                </div>
+                <div class="row"><br /></div>
+                <footer>
+                    <a href="javascript:;" class="btn btn-default" onclick="carregarPaginaAjax('/Responsavel')"><i class="fa fa-arrow-left"></i> Voltar</a>
+                </footer>
+            </fieldset>
+        }
+        else
+        {
+            <div>
+                <div></div>
+                <div class="alert alert-info alert-block" id="empreendedorIndividual2" style="display: none;">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <p>O que é o <b>EMPREENDEDOR INDIVIDUAL</b>?</p><br />
+                    <p><i class="fa fa-share"></i> Pessoa que trabalha por conta própria e que se legaliza como pequeno empresário.</p>
+                    <p><i class="fa fa-share"></i> Optante pelo Simples Nacional.</p>
+                    <p><i class="fa fa-share"></i> Não pode ter filial.</p>
+                    <p><i class="fa fa-share"></i> Não pode ser titular, sócio ou administrador de outra empresa.</p>
+                    <p>A inscrição do Empreendedor individual é feita pela internet e SOMENTE no Portal do Empreendedor.</p>
+                    <br />
+                    <hr />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <p><a href="#">Clique aqui para acessar o portal do empreendedor.</a></p>
+                        <p>Dispensa Consulta de Viabilidade, Módulo Integrador, Cadastro Sincronizado e envio de documentação para a Jucemg.</p>
+                        <p>Para mais informações, verifique as orientações disponíveis no site <a href="#">www.portaldoempreendedor.gov.br</a></p>
+                    </div>
+                </div>
+
+                <div class="alert alert-info alert-block" id="empresarioIndividual2" style="display: none;">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <p>O que é o <b>EMPRESÁRIO INDIVIDUAL</b>?</p><br />
+                    <p>
+                        <i class="fa fa-share"></i> Empresário individual é a pessoa física que exerce atividade econômica
+                        e que responde com o seu patrimônio pelas obrigações contraídas pela empresa, organizada para produção ou a circulação de bens ou serviços.
+                    </p>
+                    <br />
+                    <hr />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>1º Passo: Realizar a <span title="ou CadSinc é a integração dos procedimentos cadastrais dos órgãos e entidades que participam do processo de formalização e legalização de empresas.">Cadastro Sincronizado</span></p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>2º Passo: Preencher o  <span>Consulta de Viabilidade</span></p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>3º Passo: Preencher o Módulo Integrador</p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>4º Passo: Apresentar a documentação na unidade de atendimento da Jucemg em que a empresa terá a sua sede.</p>
+                            <i>Obs.: Se não existir unidade de atendimento naquela localidade, o processo poderá ser apresentado em qualquer uma das unidades da Jucemg.</i>
+                            <br /><br />
+                            <p><i class="fa fa-share"></i> Capa de Processo (Gerada pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Requerimento de Empresário (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade do empresário em 1 via</p>
+                            <p><i class="fa fa-share"></i> DAE pago (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> DBE – documento básico de entrada, devidamente assinado</p>
+                            <p><i class="fa fa-share"></i> (Gerado pelo Cadastro Sincronizado) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Checklist (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Consulta de Viabilidade (Gerada pelo programa de viabilidade) em 1 via</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="alert alert-info alert-block" id="sociedadeLimitada2" style="display: none;">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <p>O que é o <b>SOCIEDADE LIMITADA</b>?</p><br />
+                    <p>
+                        <i class="fa fa-share"></i> Sociedade composta por, no mínimo, dois sócios, pessoas físicas ou jurídicas.
+                        A responsabilidade de cada sócio é limitada ao valor de suas cotas, mas todos respondem solidariamente pela
+                        integralização do capital social.
+                    </p>
+                    <br />
+                    <hr />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>1º Passo: Realizar a <span>Consulta de Viabilidade</span></p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>2º Passo: Preencher o  <span>Cadastro Sincronizado</span></p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>3º Passo: Preencher o Módulo Integrador</p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>4º Passo: Apresentar a documentação na unidade de atendimento da Jucemg em que a empresa terá a sua sede.</p>
+                            <i>Obs.: Se não existir unidade de atendimento naquela localidade, o processo poderá ser apresentado em qualquer uma das unidades da Jucemg.</i>
+                            <br /><br />
+                            <p><i class="fa fa-share"></i> Capa de Processo (Gerada pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Contrato social (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade de quem assina a Capa de Processo (sócio ou não sócio) e do(s) administrador(es)</p>
+                            <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade dos sócios não administradores, se não reconhecida firma em 1 via</p>
+                            <p><i class="fa fa-share"></i> DAE pago (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> DBE – documento básico de entrada, devidamente assinado (Gerado pelo Cadastro Sincronizado)</p>
+                            <p><i class="fa fa-share"></i> Checklist (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Consulta de Viabilidade (Gerada pelo programa de viabilidade) em 1 via</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="alert alert-info alert-block" id="eireli2" style="display: none;">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <p>O que é o <b>EIRELI</b>?</p><br />
+                    <p>
+                        <i class="fa fa-share"></i> É uma empresa constituída por uma única pessoa física, titular da totalidade
+                        do capital social devidamente integralizado, que não poderá ser inferior a 100 (cem) vezes o maior salário-mínimo
+                        vigente no País. A empresa responde por dívidas apenas com seu patrimônio, e não com os bens pessoais do seu titular.
+                        Esta nova modalidade jurídica passou a ser adotada a partir de 8 de janeiro de 2012.
+                    </p>
+                    <br />
+                    <hr />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>1º Passo: Realizar a <span>Consulta de Viabilidade</span></p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>2º Passo: Preencher o  <span>Cadastro Sincronizado</span></p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>3º Passo: Preencher o Módulo Integrador</p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>4º Passo: Apresentar a documentação na unidade de atendimento da Jucemg em que a empresa terá a sua sede.</p>
+                            <i>Obs.: Se não existir unidade de atendimento naquela localidade, o processo poderá ser apresentado em qualquer uma das unidades da Jucemg.</i>
+                            <br /><br />
+                            <p><i class="fa fa-share"></i> Capa de Processo (Gerada pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Ato Constitutivo (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade do titular e do administrador não titular, se houver em 1 via</p>
+                            <p><i class="fa fa-share"></i> Declaração de desimpedimento para o exercício de administração de sociedade empresária, assinada pelo(s) administrador(es) designados no ato, em 1 via</p>
+                            <p><i class="fa fa-share"></i> DAE pago (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> DBE – documento básico de entrada, devidamente assinado (Gerado pelo Cadastro Sincronizado)</p>
+                            <p><i class="fa fa-share"></i> Checklist (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Consulta de Viabilidade (Gerada pelo programa de viabilidade) em 1 via</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="alert alert-info alert-block" id="consorsio2" style="display: none;">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <p>O que é o <b>CONSÓRCIO</b>?</p><br />
+                    <p>
+                        <i class="fa fa-share"></i> Associação de companhias ou qualquer sociedade sob o mesmo controle ou não, que
+                        não perdem sua personalidade jurídica para obter finalidade comum.
+                    </p>
+                    <br />
+                    <hr />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>1º Passo: Realizar a <span>Consulta de Viabilidade</span></p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>2º Passo: Preencher o  <span>Cadastro Sincronizado</span></p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>3º Passo: Preencher o Módulo Integrador</p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>4º Passo: Apresentar a documentação na unidade de atendimento da Jucemg em que a empresa terá a sua sede.</p>
+                            <i>Obs.: Se não existir unidade de atendimento naquela localidade, o processo poderá ser apresentado em qualquer uma das unidades da Jucemg.</i>
+                            <br /><br />
+                            <p><i class="fa fa-share"></i> Capa de Processo (Gerada pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Contrato devidamente assinado pelas consorciadas (editado pelo usuário) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade de quem assina a Capa de Processo (um dos administradores do consórcio ou procurador devidamente habilitado) em 1 via</p>
+                            <p><i class="fa fa-share"></i> DAE pago (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> DBE – documento básico de entrada, devidamente assinado (Gerado pelo Cadastro Sincronizado)</p>
+                            <p><i class="fa fa-share"></i> Checklist (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Consulta de Viabilidade (Gerada pelo programa de viabilidade) em 1 via</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="alert alert-info alert-block" id="cooperativa2" style="display: none;">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <p>O que é o <b>COOPERATIVA</b>?</p><br />
+                    <p>
+                        <i class="fa fa-share"></i> As cooperativas são sociedades de pessoas, com forma e natureza jurídica próprias e,
+                        independentemente de seu objeto, a lei as classifica como sociedade simples, não sujeita a falência,
+                        constituídas para prestar serviços aos cooperados.
+                    </p>
+                    <br />
+                    <hr />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>1º Passo: Realizar a <span>Consulta de Viabilidade</span></p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>2º Passo: Preencher o  <span>Cadastro Sincronizado</span></p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>3º Passo: Preencher o Módulo Integrador</p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>4º Passo: Apresentar a documentação na unidade de atendimento da Jucemg em que a empresa terá a sua sede.</p>
+                            <i>Obs.: Se não existir unidade de atendimento naquela localidade, o processo poderá ser apresentado em qualquer uma das unidades da Jucemg.</i>
+                            <br /><br />
+                            <p><i class="fa fa-share"></i> Capa de Processo (Gerada pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Ata da assembleia geral de constituição ou instrumento público de constituição (editado pelo usuário) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Estatuto social em 1 via</p>
+                            <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade dos administradores (conselheiros de administração e diretores) e do signatário do requerimento/ Capa de Processo em 1 via</p>
+                            <p><i class="fa fa-share"></i> Declaração de desimpedimento para o exercício do cargo dos cooperados eleitos para os órgãos de administração e fiscalização, salvo se constar na ata em 1 via</p>
+                            <p><i class="fa fa-share"></i> DBE – documento básico de entrada, devidamente assinado (Gerado pelo Cadastro Sincronizado)</p>
+                            <p><i class="fa fa-share"></i> Checklist (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Consulta de Viabilidade (Gerada pelo programa de viabilidade) em 1 via</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="alert alert-info alert-block" id="sociedadeAnonima2" style="display: none;">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <p>O que é o <b>SOCIEDADE ANÔNIMA</b>?</p><br />
+                    <p>
+                        <i class="fa fa-share"></i> A sociedade anônima ou companhia é uma empresa com fim lucrativo, que tem
+                        o seu capital dividido em ações, e a responsabilidade dos sócios ou acionistas será limitada ao preço
+                        de emissão das ações subscritas ou adquiridas. Pode ser subdividida em duas: aberta - cpata recursos junto
+                        ao público, e fechada - obtém recursos dos próprios acionistas.
+                    </p>
+                    <br />
+                    <hr />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>1º Passo: Realizar a <span>Consulta de Viabilidade</span></p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>2º Passo: Preencher o  <span>Cadastro Sincronizado</span></p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>3º Passo: Preencher o Módulo Integrador</p>
+                        </a>
+                    </div>
+                    <br />
+                    <div style="background-color: #fff;  padding: 10px 10px;">
+                        <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                            <p>4º Passo: Apresentar a documentação na unidade de atendimento da Jucemg em que a empresa terá a sua sede.</p>
+                            <i>Obs.: Se não existir unidade de atendimento naquela localidade, o processo poderá ser apresentado em qualquer uma das unidades da Jucemg.</i>
+                            <br /><br />
+                            <p><i class="fa fa-share"></i> Capa de Processo (Gerada pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade dos diretores e de quem assina a Capa de Processo em 1 via</p>
+                            <p><i class="fa fa-share"></i> Ata da assembleia geral de constituição (editado pelo usuário) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Relação completa dos subscritores do capital social (ou lista/ boletins/ cartas de subscrição) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Estatuto social, salvo se transcrito na ata em 1 via</p>
+                            <p><i class="fa fa-share"></i> Recibo de depósito bancário da parte do capital realizado em dinheiro, comprovando o depósito de, no mínimo, 10% do capital subscrito em dinheiro em 1 via</p>
+                            <p><i class="fa fa-share"></i> Folhas do Diário Oficial e do jornal de grande circulação que publicaram o anúncio convocatório da assembleia de constituição e das assembleias preliminares, se for o caso em 1 via</p>
+                            <p><i class="fa fa-share"></i> DAE pago (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> DBE – documento básico de entrada, devidamente assinado (Gerado pelo Cadastro Sincronizado)</p>
+                            <p><i class="fa fa-share"></i> DBEChecklist (Gerado pelo Módulo Integrador) em 1 via</p>
+                            <p><i class="fa fa-share"></i> Consulta de Viabilidade (Gerada pelo programa de viabilidade) em 1 via</p>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="alert alert-info alert-block" id="outrosTiposJuridicos2" style="display: none;">
+                    <a class="close" data-dismiss="alert" href="#">×</a>
+                    <p><b>LEGISLAÇÃO</b></p><br />
+
+                    <p><a href="#">DREI.</a></p>
+                </div>
+                <fieldset>
+                    <legend>Responsável</legend>
+                    <div class="row">
+                        <section class="col col-6">
+                            <label for="Nome" class="label obrigatorio">Nome</label>
+                            <label class="input">
+                                @Html.TextBoxFor(model => model.Nome)
+                            </label>
+                            @Html.ValidationMessageFor(model => model.Nome)
+                        </section>
+                        <section class="col col-6">
+                            <label for="Cpf" class="label obrigatorio">CPF</label>
+                            <label class="input">
+                                @Html.TextBoxFor(model => model.Cpf, new { @class = "cpf" })
+                            </label>
+                            @Html.ValidationMessageFor(model => model.Cpf)
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col col-6">
+                            <label for="Telefone" class="label obrigatorio">Telefone</label>
+                            <label class="input">
+                                <i class="icon-append fa fa-phone"></i>
+                                @Html.TextBoxFor(model => model.Telefone, new { @class = "telefone" })
+                                <i></i>
+                            </label>
+                            @Html.ValidationMessageFor(model => model.Telefone)
+                        </section>
+                        <section class="col col-6">
+                            <label for="Celular" class="label obrigatorio">Celular</label>
+                            <label class="input">
+                                <i class="icon-append fa fa-mobile"></i>
+                                @Html.TextBoxFor(model => model.Celular, new { @class = "telefone" })
+                                <i></i>
+                            </label>
+                            @Html.ValidationMessageFor(model => model.Celular)
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col col-6">
+                            <label for="Sexo" class="label obrigatorio">Sexo</label>
+                            <label class="select">
+                                @Html.EnumDropDownListFor(model => model.Sexo)
+                                <i></i>
+                            </label>
+                            @Html.ValidationMessageFor(model => model.Sexo)
+                        </section>
+                        <section class="col col-6">
+                            <label for="Email" class="label obrigatorio">E-mail</label>
+                            <label class="input">
+                                <i class="icon-append fa fa-envelope"></i>
+                                @Html.TextBoxFor(model => model.Email)
+                                <i></i>
+                            </label>
+                            @Html.ValidationMessageFor(model => model.Email)
+                        </section>
+                    </div>
+                    <div class="row">
+                        <section class="col col-6">
+                            <label for="TipoAbertura" class="label obrigatorio">Tipos de Abertura</label>
+                            <label class="input">
+                                @Html.TextBox("abertura", Util.GetEnumDescription(Model.TipoAbertura), new { @readonly = "readonly" })
+                            </label>
+                            @Html.ValidationMessageFor(model => model.TipoAbertura)
+                        </section>
+                        <section class="col col-6">
+                            <label for="EnviarEmail" class="label">&nbsp;</label>
+                            <label class="checkbox">
+                                @Html.CheckBoxFor(model => model.EnviarEmail) Enviar e-mail para o cliente solicitando os documentos necessários
+                                <i></i>
+                            </label>
+                            @Html.ValidationMessageFor(model => model.EnviarEmail)
+                        </section>
+                    </div>
+                </fieldset>
+                <footer>
+                    <button type="submit" class="btn btn-primary btn-submit" data-loading-text="Salvando..."><i class="fa fa-save"></i> Salvar</button>
+                    <a href="javascript:;" class="btn btn-default" onclick="carregarPaginaAjax('@Url.Action("Index", "Constituicao", new { responsavelId = (int)Session["ResponsavelId"]})')"><i class="fa fa-arrow-left"></i> Voltar</a>
+                </footer>
+            </div>
+        }
+
+        <div id="dadosResponsavel" style="display: none;">
+            <div></div>
+            <div class="alert alert-info alert-block" id="empreendedorIndividual2" style="display: none;">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <p>O que é o <b>EMPREENDEDOR INDIVIDUAL</b>?</p><br />
+                <p><i class="fa fa-share"></i> Pessoa que trabalha por conta própria e que se legaliza como pequeno empresário.</p>
+                <p><i class="fa fa-share"></i> Optante pelo Simples Nacional.</p>
+                <p><i class="fa fa-share"></i> Não pode ter filial.</p>
+                <p><i class="fa fa-share"></i> Não pode ser titular, sócio ou administrador de outra empresa.</p>
+                <p>A inscrição do Empreendedor individual é feita pela internet e SOMENTE no Portal do Empreendedor.</p>
+                <br />
+                <hr />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <p><a href="#">Clique aqui para acessar o portal do empreendedor.</a></p>
+                    <p>Dispensa Consulta de Viabilidade, Módulo Integrador, Cadastro Sincronizado e envio de documentação para a Jucemg.</p>
+                    <p>Para mais informações, verifique as orientações disponíveis no site <a href="#">www.portaldoempreendedor.gov.br</a></p>
+                </div>
+            </div>
+
+            <div class="alert alert-info alert-block" id="empresarioIndividual2" style="display: none;">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <p>O que é o <b>EMPRESÁRIO INDIVIDUAL</b>?</p><br />
+                <p>
+                    <i class="fa fa-share"></i> Empresário individual é a pessoa física que exerce atividade econômica
+                    e que responde com o seu patrimônio pelas obrigações contraídas pela empresa, organizada para produção ou a circulação de bens ou serviços.
+                </p>
+                <br />
+                <hr />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>1º Passo: Realizar a <span title="ou CadSinc é a integração dos procedimentos cadastrais dos órgãos e entidades que participam do processo de formalização e legalização de empresas.">Cadastro Sincronizado</span></p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>2º Passo: Preencher o  <span>Consulta de Viabilidade</span></p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>3º Passo: Preencher o Módulo Integrador</p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>4º Passo: Apresentar a documentação na unidade de atendimento da Jucemg em que a empresa terá a sua sede.</p>
+                        <i>Obs.: Se não existir unidade de atendimento naquela localidade, o processo poderá ser apresentado em qualquer uma das unidades da Jucemg.</i>
+                        <br /><br />
+                        <p><i class="fa fa-share"></i> Capa de Processo (Gerada pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Requerimento de Empresário (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade do empresário em 1 via</p>
+                        <p><i class="fa fa-share"></i> DAE pago (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> DBE – documento básico de entrada, devidamente assinado</p>
+                        <p><i class="fa fa-share"></i> (Gerado pelo Cadastro Sincronizado) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Checklist (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Consulta de Viabilidade (Gerada pelo programa de viabilidade) em 1 via</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="alert alert-info alert-block" id="sociedadeLimitada2" style="display: none;">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <p>O que é o <b>SOCIEDADE LIMITADA</b>?</p><br />
+                <p>
+                    <i class="fa fa-share"></i> Sociedade composta por, no mínimo, dois sócios, pessoas físicas ou jurídicas.
+                    A responsabilidade de cada sócio é limitada ao valor de suas cotas, mas todos respondem solidariamente pela
+                    integralização do capital social.
+                </p>
+                <br />
+                <hr />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>1º Passo: Realizar a <span>Consulta de Viabilidade</span></p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>2º Passo: Preencher o  <span>Cadastro Sincronizado</span></p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>3º Passo: Preencher o Módulo Integrador</p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>4º Passo: Apresentar a documentação na unidade de atendimento da Jucemg em que a empresa terá a sua sede.</p>
+                        <i>Obs.: Se não existir unidade de atendimento naquela localidade, o processo poderá ser apresentado em qualquer uma das unidades da Jucemg.</i>
+                        <br /><br />
+                        <p><i class="fa fa-share"></i> Capa de Processo (Gerada pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Contrato social (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade de quem assina a Capa de Processo (sócio ou não sócio) e do(s) administrador(es)</p>
+                        <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade dos sócios não administradores, se não reconhecida firma em 1 via</p>
+                        <p><i class="fa fa-share"></i> DAE pago (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> DBE – documento básico de entrada, devidamente assinado (Gerado pelo Cadastro Sincronizado)</p>
+                        <p><i class="fa fa-share"></i> Checklist (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Consulta de Viabilidade (Gerada pelo programa de viabilidade) em 1 via</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="alert alert-info alert-block" id="eireli2" style="display: none;">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <p>O que é o <b>EIRELI</b>?</p><br />
+                <p>
+                    <i class="fa fa-share"></i> É uma empresa constituída por uma única pessoa física, titular da totalidade
+                    do capital social devidamente integralizado, que não poderá ser inferior a 100 (cem) vezes o maior salário-mínimo
+                    vigente no País. A empresa responde por dívidas apenas com seu patrimônio, e não com os bens pessoais do seu titular.
+                    Esta nova modalidade jurídica passou a ser adotada a partir de 8 de janeiro de 2012.
+                </p>
+                <br />
+                <hr />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>1º Passo: Realizar a <span>Consulta de Viabilidade</span></p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>2º Passo: Preencher o  <span>Cadastro Sincronizado</span></p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>3º Passo: Preencher o Módulo Integrador</p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>4º Passo: Apresentar a documentação na unidade de atendimento da Jucemg em que a empresa terá a sua sede.</p>
+                        <i>Obs.: Se não existir unidade de atendimento naquela localidade, o processo poderá ser apresentado em qualquer uma das unidades da Jucemg.</i>
+                        <br /><br />
+                        <p><i class="fa fa-share"></i> Capa de Processo (Gerada pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Ato Constitutivo (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade do titular e do administrador não titular, se houver em 1 via</p>
+                        <p><i class="fa fa-share"></i> Declaração de desimpedimento para o exercício de administração de sociedade empresária, assinada pelo(s) administrador(es) designados no ato, em 1 via</p>
+                        <p><i class="fa fa-share"></i> DAE pago (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> DBE – documento básico de entrada, devidamente assinado (Gerado pelo Cadastro Sincronizado)</p>
+                        <p><i class="fa fa-share"></i> Checklist (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Consulta de Viabilidade (Gerada pelo programa de viabilidade) em 1 via</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="alert alert-info alert-block" id="consorsio2" style="display: none;">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <p>O que é o <b>CONSÓRCIO</b>?</p><br />
+                <p>
+                    <i class="fa fa-share"></i> Associação de companhias ou qualquer sociedade sob o mesmo controle ou não, que
+                    não perdem sua personalidade jurídica para obter finalidade comum.
+                </p>
+                <br />
+                <hr />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>1º Passo: Realizar a <span>Consulta de Viabilidade</span></p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>2º Passo: Preencher o  <span>Cadastro Sincronizado</span></p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>3º Passo: Preencher o Módulo Integrador</p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>4º Passo: Apresentar a documentação na unidade de atendimento da Jucemg em que a empresa terá a sua sede.</p>
+                        <i>Obs.: Se não existir unidade de atendimento naquela localidade, o processo poderá ser apresentado em qualquer uma das unidades da Jucemg.</i>
+                        <br /><br />
+                        <p><i class="fa fa-share"></i> Capa de Processo (Gerada pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Contrato devidamente assinado pelas consorciadas (editado pelo usuário) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade de quem assina a Capa de Processo (um dos administradores do consórcio ou procurador devidamente habilitado) em 1 via</p>
+                        <p><i class="fa fa-share"></i> DAE pago (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> DBE – documento básico de entrada, devidamente assinado (Gerado pelo Cadastro Sincronizado)</p>
+                        <p><i class="fa fa-share"></i> Checklist (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Consulta de Viabilidade (Gerada pelo programa de viabilidade) em 1 via</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="alert alert-info alert-block" id="cooperativa2" style="display: none;">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <p>O que é o <b>COOPERATIVA</b>?</p><br />
+                <p>
+                    <i class="fa fa-share"></i> As cooperativas são sociedades de pessoas, com forma e natureza jurídica próprias e,
+                    independentemente de seu objeto, a lei as classifica como sociedade simples, não sujeita a falência,
+                    constituídas para prestar serviços aos cooperados.
+                </p>
+                <br />
+                <hr />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>1º Passo: Realizar a <span>Consulta de Viabilidade</span></p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>2º Passo: Preencher o  <span>Cadastro Sincronizado</span></p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>3º Passo: Preencher o Módulo Integrador</p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>4º Passo: Apresentar a documentação na unidade de atendimento da Jucemg em que a empresa terá a sua sede.</p>
+                        <i>Obs.: Se não existir unidade de atendimento naquela localidade, o processo poderá ser apresentado em qualquer uma das unidades da Jucemg.</i>
+                        <br /><br />
+                        <p><i class="fa fa-share"></i> Capa de Processo (Gerada pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Ata da assembleia geral de constituição ou instrumento público de constituição (editado pelo usuário) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Estatuto social em 1 via</p>
+                        <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade dos administradores (conselheiros de administração e diretores) e do signatário do requerimento/ Capa de Processo em 1 via</p>
+                        <p><i class="fa fa-share"></i> Declaração de desimpedimento para o exercício do cargo dos cooperados eleitos para os órgãos de administração e fiscalização, salvo se constar na ata em 1 via</p>
+                        <p><i class="fa fa-share"></i> DBE – documento básico de entrada, devidamente assinado (Gerado pelo Cadastro Sincronizado)</p>
+                        <p><i class="fa fa-share"></i> Checklist (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Consulta de Viabilidade (Gerada pelo programa de viabilidade) em 1 via</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="alert alert-info alert-block" id="sociedadeAnonima2" style="display: none;">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <p>O que é o <b>SOCIEDADE ANÔNIMA</b>?</p><br />
+                <p>
+                    <i class="fa fa-share"></i> A sociedade anônima ou companhia é uma empresa com fim lucrativo, que tem
+                    o seu capital dividido em ações, e a responsabilidade dos sócios ou acionistas será limitada ao preço
+                    de emissão das ações subscritas ou adquiridas. Pode ser subdividida em duas: aberta - cpata recursos junto
+                    ao público, e fechada - obtém recursos dos próprios acionistas.
+                </p>
+                <br />
+                <hr />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>1º Passo: Realizar a <span>Consulta de Viabilidade</span></p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>2º Passo: Preencher o  <span>Cadastro Sincronizado</span></p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>3º Passo: Preencher o Módulo Integrador</p>
+                    </a>
+                </div>
+                <br />
+                <div style="background-color: #fff;  padding: 10px 10px;">
+                    <a target="_blank" href="http://portalservicos.jucemg.mg.gov.br/Portal">
+                        <p>4º Passo: Apresentar a documentação na unidade de atendimento da Jucemg em que a empresa terá a sua sede.</p>
+                        <i>Obs.: Se não existir unidade de atendimento naquela localidade, o processo poderá ser apresentado em qualquer uma das unidades da Jucemg.</i>
+                        <br /><br />
+                        <p><i class="fa fa-share"></i> Capa de Processo (Gerada pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Cópia autenticada do documento de identidade dos diretores e de quem assina a Capa de Processo em 1 via</p>
+                        <p><i class="fa fa-share"></i> Ata da assembleia geral de constituição (editado pelo usuário) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Relação completa dos subscritores do capital social (ou lista/ boletins/ cartas de subscrição) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Estatuto social, salvo se transcrito na ata em 1 via</p>
+                        <p><i class="fa fa-share"></i> Recibo de depósito bancário da parte do capital realizado em dinheiro, comprovando o depósito de, no mínimo, 10% do capital subscrito em dinheiro em 1 via</p>
+                        <p><i class="fa fa-share"></i> Folhas do Diário Oficial e do jornal de grande circulação que publicaram o anúncio convocatório da assembleia de constituição e das assembleias preliminares, se for o caso em 1 via</p>
+                        <p><i class="fa fa-share"></i> DAE pago (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> DBE – documento básico de entrada, devidamente assinado (Gerado pelo Cadastro Sincronizado)</p>
+                        <p><i class="fa fa-share"></i> DBEChecklist (Gerado pelo Módulo Integrador) em 1 via</p>
+                        <p><i class="fa fa-share"></i> Consulta de Viabilidade (Gerada pelo programa de viabilidade) em 1 via</p>
+                    </a>
+                </div>
+            </div>
+
+            <div class="alert alert-info alert-block" id="outrosTiposJuridicos2" style="display: none;">
+                <a class="close" data-dismiss="alert" href="#">×</a>
+                <p><b>LEGISLAÇÃO</b></p><br />
+
+                <p><a href="#">DREI.</a></p>
+            </div>
+            <fieldset>
+                <legend>Responsável</legend>
+                <div class="row">
+                    <section class="col col-6">
+                        <label for="Nome" class="label obrigatorio">Nome</label>
+                        <label class="input">
+                            @Html.TextBoxFor(model => model.Nome)
+                        </label>
+                        @Html.ValidationMessageFor(model => model.Nome)
+                    </section>
+                    <section class="col col-6">
+                        <label for="Cpf" class="label obrigatorio">CPF</label>
+                        <label class="input">
+                            @Html.TextBoxFor(model => model.Cpf, new { @class = "cpf" })
+                        </label>
+                        @Html.ValidationMessageFor(model => model.Cpf)
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-6">
+                        <label for="Rg" class="label obrigatorio">RG</label>
+                        <label class="input">
+                            @Html.TextBoxFor(model => model.Rg)
+                        </label>
+                        @Html.ValidationMessageFor(model => model.Rg)
+                    </section>
+                    <section class="col col-6">
+                        <label for="EstadoCivil" class="label obrigatorio">Estado Civil</label>
+                        <label class="select">
+                            @Html.EnumDropDownListFor(model => model.EstadoCivil)
+                            <i></i>
+                        </label>
+                        @Html.ValidationMessageFor(model => model.EstadoCivil)
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-6">
+                        <label for="Telefone" class="label obrigatorio">Telefone</label>
+                        <label class="input">
+                            @Html.TextBoxFor(model => model.Telefone, new { @class = "telefone" })
+                            <i></i>
+                        </label>
+                        @Html.ValidationMessageFor(model => model.Telefone)
+                    </section>
+                    <section class="col col-6">
+                        <label for="Celular" class="label obrigatorio">Celular</label>
+                        <label class="input">
+                            @Html.TextBoxFor(model => model.Celular, new { @class = "telefone" })
+                            <i></i>
+                        </label>
+                        @Html.ValidationMessageFor(model => model.Celular)
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-6">
+                        <label for="Sexo" class="label obrigatorio">Sexo</label>
+                        <label class="select">
+                            @Html.EnumDropDownListFor(model => model.Sexo)
+                            <i></i>
+                        </label>
+                        @Html.ValidationMessageFor(model => model.Sexo)
+                    </section>
+                    <section class="col col-6">
+                        <label for="Email" class="label obrigatorio">E-mail</label>
+                        <label class="input">
+                            @Html.TextBoxFor(model => model.Email)
+                            <i></i>
+                        </label>
+                        @Html.ValidationMessageFor(model => model.Email)
+                    </section>
+                </div>
+                <div class="row">
+                    <section class="col col-6">
+                        <label for="TipoAbertura" class="label obrigatorio">Tipos de Abertura</label>
+                        <label class="input">
+                            @Html.TextBox("abertura", (string)ViewBag.tipoAbertura, new { @readonly = "readonly" })
+                        </label>
+                        @Html.ValidationMessageFor(model => model.TipoAbertura)
+                    </section>
+                    <section class="col col-6">
+                        <label for="EnviarEmail" class="label">&nbsp;</label>
+                        <label class="checkbox">
+                            @Html.CheckBoxFor(model => model.EnviarEmail) Enviar e-mail para o cliente solicitando os documentos necessários
+                            <i></i>
+                        </label>
+                        @Html.ValidationMessageFor(model => model.EnviarEmail)
+                    </section>
+                </div>
+            </fieldset>
+            <footer>
+                <button type="submit" class="btn btn-primary btn-submit" data-loading-text="Salvando..."><i class="fa fa-save"></i> Salvar</button>
+                <a href="javascript:;" class="btn btn-default" onclick="carregarPaginaAjax('/Responsavel/Editar')"><i class="fa fa-arrow-left"></i> Voltar</a>
+            </footer>
+        </div>
+    }
+    
+</div>
+<script src="@Url.Content("~/Scripts/views/responsavelEditar.js")" type="text/javascript"></script>
+<script type="text/javascript">
+    $("#empreendedorIndividual").click(function () {
+        $("#show").hide();
+        $("#dadosResponsavel").show();
+
+        $("#empreendedorIndividual2").show();
+        $("#empresarioIndividual2").hide();
+        $("#sociedadeLimitada2").hide();
+        $("#eireli2").hide();
+        $("#consorsio2").hide();
+        $("#cooperativa2").hide();
+        $("#sociedadeAnonima2").hide();
+        $("#outrosTiposJuridicos2").hide();
+
+        $("#abertura").val('');
+        $("#abertura").val('Empreendedor Individual');
+
+
+    });
+
+    $("#empresarioIndividual").click(function () {
+        $("#show").hide();
+        $("#dadosResponsavel").show();
+
+        $("#empresarioIndividual2").show();
+        $("#empreendedorIndividual2").hide();
+        $("#sociedadeLimitada2").hide();
+        $("#eireli2").hide();
+        $("#consorsio2").hide();
+        $("#cooperativa2").hide();
+        $("#sociedadeAnonima2").hide();
+        $("#outrosTiposJuridicos2").hide();
+
+        $("#abertura").val('');
+        $("#abertura").val('Empresário Individual');
+    });
+    $("#sociedadeLimitada").click(function () {
+        $("#show").hide();
+        $("#dadosResponsavel").show();
+
+        $("#sociedadeLimitada2").show();
+        $("#empresarioIndividual2").hide();
+        $("#empreendedorIndividual2").hide();
+        $("#eireli2").hide();
+        $("#consorsio2").hide();
+        $("#cooperativa2").hide();
+        $("#sociedadeAnonima2").hide();
+        $("#outrosTiposJuridicos2").hide();
+
+        $("#abertura").val('');
+        $("#abertura").val('Sociedade Limitada');
+    });
+    $("#eireli").click(function () {
+        $("#show").hide();
+        $("#dadosResponsavel").show();
+
+        $("#eireli2").show();
+        $("#sociedadeLimitada2").hide();
+        $("#empresarioIndividual2").hide();
+        $("#empreendedorIndividual2").hide();
+        $("#consorsio2").hide();
+        $("#cooperativa2").hide();
+        $("#sociedadeAnonima2").hide();
+        $("#outrosTiposJuridicos2").hide();
+
+        $("#abertura").val('');
+        $("#abertura").val('EIRELI');
+    });
+    $("#consorsio").click(function () {
+        $("#show").hide();
+        $("#dadosResponsavel").show();
+
+        $("#consorsio2").show();
+        $("#eireli2").hide();
+        $("#sociedadeLimitada2").hide();
+        $("#empresarioIndividual2").hide();
+        $("#empreendedorIndividual2").hide();
+        $("#cooperativa2").hide();
+        $("#sociedadeAnonima2").hide();
+        $("#outrosTiposJuridicos2").hide();
+
+        $("#abertura").val('');
+        $("#abertura").val('Consórcio');
+    });
+    $("#cooperativa").click(function () {
+        $("#show").hide();
+        $("#dadosResponsavel").show();
+
+        $("#cooperativa2").show();
+        $("#consorsio2").hide();
+        $("#eireli2").hide();
+        $("#sociedadeLimitada2").hide();
+        $("#empresarioIndividual2").hide();
+        $("#empreendedorIndividual2").hide();
+        $("#sociedadeAnonima2").hide();
+        $("#outrosTiposJuridicos2").hide();
+
+        $("#abertura").val('');
+        $("#abertura").val('Cooperativa');
+    });
+    $("#sociedadeAnonima").click(function () {
+        $("#show").hide();
+        $("#dadosResponsavel").show();
+
+        $("#sociedadeAnonima2").show();
+        $("#cooperativa2").hide();
+        $("#consorsio2").hide();
+        $("#eireli2").hide();
+        $("#sociedadeLimitada2").hide();
+        $("#empresarioIndividual2").hide();
+        $("#empreendedorIndividual2").hide();
+        $("#outrosTiposJuridicos2").hide();
+
+        $("#abertura").val('');
+        $("#abertura").val('Sociedade Anônima');
+    });
+    $("#outrosTiposJuridicos").click(function () {
+        $("#show").hide();
+        $("#dadosResponsavel").show();
+
+        $("#outrosTiposJuridicos2").show();
+        $("#sociedadeAnonima2").hide();
+        $("#cooperativa2").hide();
+        $("#consorsio2").hide();
+        $("#eireli2").hide();
+        $("#sociedadeLimitada2").hide();
+        $("#empresarioIndividual2").hide();
+        $("#empreendedorIndividual2").hide();
+
+        $("#abertura").val('');
+        $("#abertura").val('Outros Tipos Jurídicos');
+    });
+
+
+    $("#empreendedorIndividual").click(function () {
+        $("#dadosResponsavel").show();
+    });
+</script>
+

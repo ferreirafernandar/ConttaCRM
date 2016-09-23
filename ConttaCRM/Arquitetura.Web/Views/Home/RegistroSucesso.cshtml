@@ -1,0 +1,16 @@
+﻿@model UsuarioDTO
+
+<header>
+    <i class="fa fa-check"></i> <span class="text-success">Conta criada com sucesso!</span>
+</header>
+
+<fieldset>
+    <p>Sua conta foi criada com sucesso! Seu nome de usuário é <b>@Model.NomeUsuario</b>.</p>
+    <br />
+    <p>Clique em continuar para acessar o sistema.</p>
+    <br />
+    <div style="height:100px"></div>
+</fieldset>
+<footer>
+    <a href="@Url.Action("Inicio", "Home")" class="btn btn-primary">Continuar</a>
+</footer>

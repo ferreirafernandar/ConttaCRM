@@ -1,0 +1,45 @@
+﻿<nav>
+    <ul>
+        <li>
+            <a href="javascript:;" onclick="carregarPaginaAjax('/Dashboard/Index')" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Início</span></a>
+        </li>
+        <li>
+            <a href="javascript:;"><i class="fa fa-lg fa-fw fa-edit"></i> <span class="menu-item-parent">Cadastro</span></a>
+            <ul>
+                <li>
+                    <a href="javascript:;" onclick="carregarPaginaAjax('/Usuario/Index')">Usuários</a>
+                </li>
+                <li>
+                    <a href="javascript:;" onclick="carregarPaginaAjax('/Cliente/Index')">Clientes</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;"><i class="fa fa-lg fa-fw fa-building"></i> <span class="menu-item-parent">Constituição</span></a>
+            <ul>
+                @*<li>
+                    <a href="javascript:;" onclick="carregarPaginaAjax('/Entrevista/Editar')">Entrevista</a>
+                </li>*@
+                <li>
+                    <a href="javascript:;" onclick="carregarPaginaAjax('/Responsavel/Index')">Abertura</a>
+                </li>
+                @*<li>
+                    <a href="javascript:;" onclick="carregarPaginaAjax('/Constituicao/Index')">Abertura</a>
+                </li>*@
+                <li>
+                    <a href="javascript:;" onclick="carregarPaginaAjax('/Cliente/Index')">Alteração</a>
+                </li>
+                <li>
+                    <a href="javascript:;" onclick="carregarPaginaAjax('/Cliente/Index')">Baixa</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" title="Cliente" onclick="carregarPaginaAjax('/Configuracao/Index')"><i class=" fa fa-lg fa-fw fa-gear"></i> <span class="menu-item-parent">Configuração</span></a>
+        </li>
+        <li>
+            <a href="javascript:;" title="Cliente" onclick="carregarPaginaAjax('/Fatura/GerarFaturas')"><i class=" fa fa-lg fa-fw fa-dollar"></i> <span class="menu-item-parent">Gerar faturas</span></a>
+        </li>
+    </ul>
+</nav>
+<!-- JARVIS WIDGETS -->

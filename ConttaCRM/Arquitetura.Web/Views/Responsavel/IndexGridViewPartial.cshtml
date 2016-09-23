@@ -1,0 +1,19 @@
+﻿@model PagedList<ResponsavelListDTO>
+<div id="grid">
+    @{
+        var grid = new WebGrid(null, rowsPerPage: Model.PageSize, ajaxUpdateContainerId: "grid", ajaxUpdateCallback: "onGridLoadCallBack('" + Model.GridId + "');" + Model.ExecutarScripts);
+        grid.Bind(Model.Entities, rowCount: Model.TotalRecords, autoSortAndPage: false);
+    }
+    @grid.Table(
+        columns: grid.Columns(
+        grid.Column(null, null, format: @<input type="hidden" name="url" value="@Url.Action("Index", "Constituicao", new { responsavelId = item.Id })" />),
+        grid.Column(columnName: "Nome", header: "Nome", canSort: true),
+        grid.Column(columnName: "Cpf", header: "CPF", canSort: true),
+        grid.Column(columnName: "Telefone", header: "Telefone", canSort: true),
+        grid.Column(columnName: "Celular", header: "Celular", canSort: true),
+        grid.Column(columnName: "Email", header: "E-mail", canSort: true),
+        grid.Column(columnName: "Sexo", header: "Sexo", format: @<text> @(Util.GetEnumDescription(item.Sexo)) </text>)
+        )
+        , footer: @<div>@Html.Partial("_GridPaginacao")</div>
+        , tableStyle: "table table-hover table-hide-first table-row-link")
+</div>

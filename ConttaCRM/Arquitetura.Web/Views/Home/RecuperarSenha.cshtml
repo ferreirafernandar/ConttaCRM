@@ -1,0 +1,87 @@
+﻿@{
+    ViewBag.Title = "Visão Web - Recuperar Senha";
+    Layout = "~/Views/Shared/_LayoutAcesso.cshtml";
+}
+<div class="col-xs-12 col-sm-12 col-md-5 col-lg-4">
+    <div class="well no-padding">
+        @using (Html.BeginForm("RecuperarSenha", "Home", FormMethod.Post, new { @class = "smart-form client-form", id = "login-form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.Hidden("returnUrl", ViewBag.ReturnUrl as string)
+            <header>
+                Recuperar Senha
+            </header>
+
+            <fieldset>
+                @if (ViewBag.Error != null)
+                {
+                    <p class="text-danger">@ViewBag.Error</p><br />
+                }
+                
+                @if (ViewBag.AlertSuccess != null)
+                {
+                    <p class="text-success">@ViewBag.AlertSuccess</p><br />
+                }
+
+                <section>
+                    <label class="label">Usuário</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-user"></i>
+                        <input type="text" name="usuario" value="@ViewBag.Usuario">
+                        <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Digite seu usuário</b>
+                    </label>
+                </section>
+            </fieldset>
+            <footer>
+                <button type="submit" class="btn btn-primary">
+                    Recuperar
+                </button>
+            </footer>
+        }
+    </div>
+
+    <h5 class="text-center"> - Ou entre usando -</h5>
+
+    <ul class="list-inline text-center">
+        <li>
+            <a href="javascript:void(0);" class="btn btn-primary btn-circle"><i class="fa fa-facebook"></i></a>
+        </li>
+        <li>
+            <a href="javascript:void(0);" class="btn btn-info btn-circle"><i class="fa fa-twitter"></i></a>
+        </li>
+        <li>
+            <a href="javascript:void(0);" class="btn btn-warning btn-circle"><i class="fa fa-linkedin"></i></a>
+        </li>
+    </ul>
+
+</div>
+
+@section scripts {
+    <script type="text/javascript">
+        runAllForms();
+
+        $(function () {
+            // Validation
+            $("#login-form").validate({
+                // Rules for form validation
+                rules: {
+                    usuario: {
+                        required: true
+                    }
+                },
+
+                // Messages for form validation
+                messages: {
+                    usuario: {
+                        required: 'Por favor informe seu usuário'
+                    }
+                },
+
+                // Do not change code below
+                errorPlacement: function (error, element) {
+                    error.insertAfter(element.parent());
+                }
+            });
+        });
+    </script>
+}

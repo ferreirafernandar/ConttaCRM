@@ -1,0 +1,116 @@
+﻿/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ff0000 !important;
+    background-color: #ffeeee !important;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+    margin-left: 30px;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* custom styles */
+
+.box-content {
+    border:1px solid #CCC;
+    background-color:#FFF;
+    padding:15px;
+}
+
+.lower {
+    text-transform: lowercase;
+}
+
+#conteudo {
+    border: 1px solid red;
+    width: 800px;
+    margin: 0 auto;
+}
+
+.page-numbers {
+    border: 0px;
+    margin: 2px;
+    padding: 4px;
+}
+
+a.page-numbers {
+    border: 1px solid #c5c5c5;
+}
+
+a.page-numbers.current {
+    background-color: #ddd;
+    text-decoration: none;
+}
+
+label.obrigatorio::after {
+    content: " *";
+    color: #FF0000;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+
+#logo {
+    margin-top: 0;
+}
+
+.btn-adicionar {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.empty-grid {
+    font-style: italic;
+    color: #aaa;
+    text-align: center;
+    font-size: 16px;
+}
+
+.table-hide-first thead th:nth-child(1) {
+    display: none;
+}
+
+.table-hide-first tbody td:nth-child(1) {
+    display: none;
+}
+
+.table-row-link tbody td {
+    cursor: pointer;
+}
+
+
+.dt-toolbar-footer {
+    border-top: none;
+}
+
+.select2-hidden-accessible {
+    display: none !important;
+    visibility: hidden !important;
+}
+
+.smart-form *[readonly] {
+    cursor: not-allowed !important;
+    background-color: #f5f5f5 !important;
+    opacity: 1 !important;
+}
+
+.smart-form fieldset+fieldset {
+    border-top:0;
+}
+
+.corrigirMargemBtn{
+    padding:5px 22px;
+}

@@ -1,0 +1,242 @@
+﻿@model UsoSoloDTO
+
+@{
+    var addEdit = Model.Id == 0 ? "Adicionar" : "Editar";
+}
+
+<h1 class="page-title txt-color-blueDark">
+
+    <!-- PAGE HEADER -->
+    <i class="fa-fw fa fa-edit"></i>
+    Uso de Solo
+    <span>
+        >
+        @addEdit
+    </span>
+</h1>
+
+@Html.Partial("_Mensagens")
+
+<div class="box-content">
+
+    @using (Ajax.BeginForm("POSTEditar", "UsoSolo", new AjaxOptions { UpdateTargetId = "page-content", InsertionMode = InsertionMode.Replace, HttpMethod = "Post", OnFailure = "OnFailure", OnSuccess = "OnSuccess" }, new { @class = "smart-form" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id);
+        @Html.HiddenFor(model => model.ResponsavelId);
+
+        <fieldset>
+            <legend>Solicitação Uso de Solo</legend>
+            <div class="row">
+                <section class="col col-6">
+                    <label for="Iptu" class="label obrigatorio"> Inscrição de IPTU</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Iptu, new { @readonly = "somentenumeros" })
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Iptu)
+                </section>
+                <section class="col col-6">
+                    <label class="checkbox">
+                        @Html.CheckBoxFor(model => model.ImovelRual) Imóvel Rural
+                        <i></i>
+                    </label>
+                </section>
+            </div>
+            <div class="row">
+                <section class="col col-6">
+                    <label for="EnderecoRural" class="label obrigatorio">Endereço Rural </label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.EnderecoRural)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.EnderecoRural)
+                </section>
+                <section class="col col-6">
+                    <label for="Complemento" class="label obrigatorio">Complemento</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Complemento)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Complemento)
+                </section>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Endereço do Estabelecimento</legend>
+            <div class="row">
+                <section class="col col-6">
+                    <label for="Rua" class="label obrigatorio">Logradouro(Rua/Av.)</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Rua)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Rua)
+                </section>
+                <section class="col col-6">
+                    <label for="Quadra" class="label obrigatorio">Quadra</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Quadra)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Quadra)
+                </section>
+            </div>
+            <div class="row">
+                <section class="col col-6">
+                    <label for="Lote" class="label obrigatorio">Lote</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Lote)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Lote)
+                </section>
+                <section class="col col-6">
+                    <label for="Bairro" class="label obrigatorio">Setor/Bairro</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Bairro)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Bairro)
+                </section>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend>Informe os Códigos das Atividades Econômicas</legend>
+            <div class="row">
+                <section class="col col-6">
+                    <label for="Cnae" class="label obrigatorio">Cód Atividade CNAE</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Cnae)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Cnae)
+                </section>
+                <section class="col col-6">
+                    <label class="checkbox">
+                        @Html.CheckBoxFor(model => model.Escritorio) Escritório
+                        <i></i>
+                    </label>
+                </section>
+            </div>
+            <div>
+                <section>
+                    <label for="Observacoes" class="label">Observações</label>
+                    <label class="textarea">
+                        @Html.TextAreaFor(model => model.Observacoes, new { @class = "custom-scroll", @rows = "5" })
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Observacoes)
+                </section>
+            </div>
+        </fieldset>
+        <iframe src="http://www.goiania.go.gov.br/sistemas/saces/asp/saces00000f0.asp?sigla=sinpo&prog=sinpo00100f0.asp" width="100%" height="800" id="frame"></iframe>
+
+        <footer>
+            <button type="submit" class="btn btn-primary btn-submit" data-loading-text="Salvando..."><i class="fa fa-save"></i> Salvar</button>
+            <button type="submit" class="btn btn-danger btn-submit"><i class="fa fa-send-o"></i> Enviar para prefeitura</button>
+            <a href="javascript:;" class="btn btn-default" onclick="carregarPaginaAjax('@Url.Action("Index", "Constituicao", new { responsavelId = (int)Session["ResponsavelId"]})')"><i class="fa fa-arrow-left"></i> Voltar</a>
+        </footer>
+    }
+
+</div>
+<script src="@Url.Content("~/Scripts/views/numeroOficialEditar.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    function consiste() {
+
+        with (document.frm) {
+
+            if (ftrim(requerente.value) == "") {
+                alert("Informe o nome do requerente.");
+                txt_nm_requerente.focus();
+                return false;
+            }
+
+            if (ftrim(rg.value) == "") {
+                alert("Informe o documento de identidade do requerente.");
+                txt_identidade.focus();
+                return false;
+            }
+
+            if (Iptu.value == true) {
+
+                if (ftrim(iptu.value) == "") {
+                    alert("Informe a inscrição do IPTU.");
+                    txt_nm_iptu.focus();
+                    return false;
+                }
+            }
+
+            if (ftrim(situacaoLocal.value) == "") {
+                alert("Informe a situação.");
+                sel_situacao.focus();
+                return false;
+            }
+
+            if (SituacaoLocal.value == "1") {
+                if (ftrim(gerarNumeroOficial.value) == "") {
+                    alert("Informe a sala ou residência para o qual o número será gerado.");
+                    sel_local_referencia.focus();
+                    return false;
+                }
+            }
+
+            if (SituacaoLocal.value == "9") {
+                if (ftrim(arq_croqui.value) == "") {
+                    alert("Informe o arquivo de imagem contendo o esboço.");
+                    arq_croqui.focus();
+                    return false;
+                }
+
+                aux = arq_croqui.value.length;
+
+                if (arq_croqui.value.substring(aux, aux - 4).toLowerCase() != ".jpg" && arq_croqui.value.substring(aux, aux - 4).toLowerCase() != ".pdf") {
+                    alert("Arquivo inválido. Arquivo de imagem contendo o esboço deve obrigatoriamente conter a extensão \".jpg\" ou \".pdf\".");
+                    arq_croqui.focus();
+                    return false;
+                }
+            }
+
+            if (ftrim(Telefone.value) == "") {
+                if (!confirm("ATENÇÃO!\n\nO telefone não foi informado! Este dado é importante para que possamos, caso necessário, entrar em contato. Caso você queira prosseguir mesmo assim, clique em 'OK'. Caso contrário, clique em 'Cancelar' e preencha o campo 'Telefone'.")) {
+                    txt_telefone.focus();
+                    return false;
+                }
+            }
+
+        }
+        return true;
+    }
+
+    function cadastra() {
+        if (consiste()) {
+            with (document.frm) {
+                arg = "txt_nm_requerente=" + escape(requerente.value);
+                arg = arg + "&txt_identidade=" + escape(rg.value);
+                arg = arg + "&txt_nm_iptu=" + escape(iptu.value);
+                arg = arg + "&hdd_cd_logesquina=" + escape("");
+                arg = arg + "&sel_end_logradouro=" + escape(rua.value);
+                arg = arg + "&txt_end_complemento=" + escape("");
+                arg = arg + "&txt_end_quadra=" + escape("");
+                arg = arg + "&txt_end_lote=" + escape("");
+                arg = arg + "&sel_end_setor=" + escape("");
+                arg = arg + "&txt_end_sem_bairro1=" + escape("");
+                arg = arg + "&txt_end_sem_bairro2=" + escape("");
+                arg = arg + "&sel_outros_estab=" + escape("");
+                arg = arg + "&txt_atividade=" + escape(atividade.value);
+                arg = arg + "&txt_telefone=" + escape(telefone.value);
+                arg = arg + "&txt_info1=" + escape("");
+                arg = arg + "&txt_info2=" + escape("");
+                arg = arg + "&sel_situacao=" + escape(situacaoLocal.value);
+                arg = arg + "&sel_local_referencia=" + escape("");
+                arg = arg + "&txt_casa1=" + escape("");
+                arg = arg + "&txt_casa2=" + escape("");
+                arg = arg + "&txt_casa3=" + escape("");
+            }
+            var baseUrl = "http://www.goiania.go.gov.br";
+            var url = "/sistemas/sinpo/asp/sinpo00100a2.asp?" + arg;
+        }
+    }
+
+
+</script>
+<script type="text/javascript">
+    function myFrame() {
+        
+        $("input[name='txt_nm_requerente']", parent.document).val("fernanda");
+
+    };
+</script>

@@ -1,0 +1,28 @@
+﻿@model PagedList<UsuarioListDTO>
+<div id="grid">
+    @{
+        var grid = new WebGrid(null, rowsPerPage: Model.PageSize, ajaxUpdateContainerId: "grid", ajaxUpdateCallback: "onGridLoadCallBack('" + Model.GridId + "');" + Model.ExecutarScripts);
+        grid.Bind(Model.Entities, rowCount: Model.TotalRecords, autoSortAndPage: false);
+    }
+    @grid.Table(
+        columns: grid.Columns(
+        grid.Column(null, null, format: @<input type="hidden" name="url" value="@Url.Action("Editar", new { id = item.Id })" />),
+        grid.Column(columnName: "Nome", header: "Nome", canSort: true),
+        grid.Column(columnName: "NomeUsuario", header: "Usuário (login)", canSort: true),
+        grid.Column(columnName: "Email", header: "E-mail", canSort: true),
+        grid.Column(columnName: "TipoUsuario", header: "Tipo", format: @<text> @(Util.GetEnumDescription(item.TipoUsuario)) </text>),
+        grid.Column(columnName: "Ativo", header: "Ativo", format:
+        @<text>
+            @if (item.Ativo)
+            {
+                @:<i class="fa fa-check text-success" title="Ativo"></i>
+                         }
+            else
+            {
+                @:<i class="fa fa-times text-danger" title="Inativo"></i>
+                         }
+        </text>)
+        )
+        , footer: @<div>@Html.Partial("_GridPaginacao")</div>
+                                            , tableStyle: "table table-hover table-hide-first table-row-link")
+</div>

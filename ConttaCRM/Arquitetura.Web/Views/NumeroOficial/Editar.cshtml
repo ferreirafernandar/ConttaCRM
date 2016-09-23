@@ -1,0 +1,274 @@
+﻿@model NumeroOficialDTO
+
+@{
+    var addEdit = Model.Id == 0 ? "Adicionar" : "Editar";
+}
+
+<h1 class="page-title txt-color-blueDark">
+
+    <!-- PAGE HEADER -->
+    <i class="fa-fw fa fa-edit"></i>
+    Número Oficial
+    <span>
+        >
+        @addEdit
+    </span>
+</h1>
+
+@Html.Partial("_Mensagens")
+
+<div class="box-content">
+
+    @using (Ajax.BeginForm("POSTEditar", "NumeroOficial", new AjaxOptions { UpdateTargetId = "page-content", InsertionMode = InsertionMode.Replace, HttpMethod = "Post", OnFailure = "OnFailure", OnSuccess = "OnSuccess" }, new { @class = "smart-form" }))
+    {
+        @Html.ValidationSummary(true)
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(model => model.Id);
+        @Html.HiddenFor(model => model.ResponsavelId);
+
+        <fieldset>
+            <legend>Solicitação de Número Oficial</legend>
+            <div class="row">
+                <section class="col col-4">
+                    <label for="Requerente" class="label obrigatorio">Requerente</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Requerente, new { @readonly = "readonly" })
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Requerente)
+                </section>
+                <section class="col col-4">
+                    <label for="Rg" class="label obrigatorio">Doc. Identidade</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Rg, new { @readonly = "readonly" })
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Rg)
+                </section>
+                <section class="col col-4">
+                    <label for="Telefone" class="label obrigatorio">Telefone</label>
+                    <label class="input">
+                        <i class="icon-append fa fa-phone"></i>
+                        @Html.TextBoxFor(model => model.Telefone, new { @class = "telefone", @readonly = "readonly" })
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Telefone)
+                </section>
+            </div>
+            <div class="row">
+                <section class="col col-4">
+                    <label for="Rua" class="label obrigatorio">Logradouro de referência </label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Rua, new { @readonly = "readonly" })
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Rua)
+                </section>
+                <section class="col col-4">
+                    <label for="Atividade" class="label obrigatorio">Atividade</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Atividade)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Atividade)
+                </section>
+                <section class="col col-4">
+                    <label for="Iptu" class="label obrigatorio">IPTU</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.Iptu, new { @readonly = "readonly" })
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Iptu)
+                </section>
+            </div>
+            <div class="row">
+                <section class="col col-6">
+                    <label class="checkbox">
+                        @Html.CheckBoxFor(model => model.PossuiIptu) O imóvel possui uma inscrição no IPTU / ITU?
+                        <i></i>
+                    </label>
+                </section>
+                <section class="col col-6">
+                    <label class="checkbox">
+                        @Html.CheckBoxFor(model => model.ExisteEdificacao) Existem outras edificações no lote?
+                        <i></i>
+                    </label>
+                </section>
+
+            </div>
+            <div>
+                <section>
+                    <label for="SituacaoLocal" class="label">Situação</label>
+                    <label class="select">
+                        @Html.EnumDropDownListFor(model => model.SituacaoLocal)
+                        <i></i>
+                    </label>
+                    @Html.ValidationMessageFor(model => model.SituacaoLocal)
+                </section>
+            </div>
+            <div class="row"><br /><br /></div>
+            <div class="row" style="margin: 0 0 0 80px">
+                <div class="col col-6">
+                    <img src="~/Content/img/situacao1.jpg" />
+                </div>
+                <div class="col col-6">
+                    <img src="~/Content/img/situacao2.jpg" />
+                </div>
+            </div>
+            <div class="row"><br /><br /></div>
+            <div class="row"><br /><br /></div>
+            <div class="row" style="margin: 0 0 0 80px">
+                <div class="col col-6">
+                    <img src="~/Content/img/situacao3.jpg" />
+                </div>
+                <div class="col col-6">
+                    <img src="~/Content/img/outra_situacao.jpg" />
+                </div>
+            </div>
+            <div class="row"><br /><br /></div>
+            <div class="row">
+                <section class="col col-4">
+                    <label for="GerarNumeroOficial" class="label">Gerar Nº Oficial para</label>
+                    <label class="select">
+                        @Html.EnumDropDownListFor(model => model.GerarNumeroOficial)
+                        <i></i>
+                    </label>
+                    @Html.ValidationMessageFor(model => model.GerarNumeroOficial)
+                </section>
+                <section class="col col-4">
+                    <label for="NumeroOficialB" class="label">Número Oficial de B</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.NumeroOficialB)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.NumeroOficialB)
+                </section>
+                <section class="col col-4">
+                    <label for="NumeroOficialC" class="label">Número Oficial de C</label>
+                    <label class="input">
+                        @Html.TextBoxFor(model => model.NumeroOficialC)
+                    </label>
+                    @Html.ValidationMessageFor(model => model.NumeroOficialC)
+                </section>
+            </div>
+            <div>
+                <section>
+                    <label for="Observacoes" class="label">Observações</label>
+                    <label class="textarea">
+                        @Html.TextAreaFor(model => model.Observacoes, new { @class = "custom-scroll", @rows = "5" })
+                    </label>
+                    @Html.ValidationMessageFor(model => model.Observacoes)
+                </section>
+            </div>
+        </fieldset>
+        <iframe src="http://www.goiania.go.gov.br/sistemas/saces/asp/saces00000f0.asp?sigla=sinpo&prog=sinpo00100f0.asp" width="100%" height="800" id="frame"></iframe>
+
+        <footer>
+            <button type="submit" class="btn btn-primary btn-submit" data-loading-text="Salvando..."><i class="fa fa-save"></i> Salvar</button>
+            <button type="submit" class="btn btn-danger btn-submit"><i class="fa fa-send-o"></i> Enviar para prefeitura</button>
+            <a href="javascript:;" class="btn btn-default" onclick="carregarPaginaAjax('@Url.Action("Index", "Constituicao", new { responsavelId = (int)Session["ResponsavelId"]})')"><i class="fa fa-arrow-left"></i> Voltar</a>
+        </footer>
+    }
+
+</div>
+<script src="@Url.Content("~/Scripts/views/numeroOficialEditar.js")" type="text/javascript"></script>
+
+<script type="text/javascript">
+    function consiste() {
+
+        with (document.frm) {
+
+            if (ftrim(requerente.value) == "") {
+                alert("Informe o nome do requerente.");
+                txt_nm_requerente.focus();
+                return false;
+            }
+
+            if (ftrim(rg.value) == "") {
+                alert("Informe o documento de identidade do requerente.");
+                txt_identidade.focus();
+                return false;
+            }
+
+            if (Iptu.value == true) {
+
+                if (ftrim(iptu.value) == "") {
+                    alert("Informe a inscrição do IPTU.");
+                    txt_nm_iptu.focus();
+                    return false;
+                }
+            }
+
+            if (ftrim(situacaoLocal.value) == "") {
+                alert("Informe a situação.");
+                sel_situacao.focus();
+                return false;
+            }
+
+            if (SituacaoLocal.value == "1") {
+                if (ftrim(gerarNumeroOficial.value) == "") {
+                    alert("Informe a sala ou residência para o qual o número será gerado.");
+                    sel_local_referencia.focus();
+                    return false;
+                }
+            }
+
+            if (SituacaoLocal.value == "9") {
+                if (ftrim(arq_croqui.value) == "") {
+                    alert("Informe o arquivo de imagem contendo o esboço.");
+                    arq_croqui.focus();
+                    return false;
+                }
+
+                aux = arq_croqui.value.length;
+
+                if (arq_croqui.value.substring(aux, aux - 4).toLowerCase() != ".jpg" && arq_croqui.value.substring(aux, aux - 4).toLowerCase() != ".pdf") {
+                    alert("Arquivo inválido. Arquivo de imagem contendo o esboço deve obrigatoriamente conter a extensão \".jpg\" ou \".pdf\".");
+                    arq_croqui.focus();
+                    return false;
+                }
+            }
+
+            if (ftrim(Telefone.value) == "") {
+                if (!confirm("ATENÇÃO!\n\nO telefone não foi informado! Este dado é importante para que possamos, caso necessário, entrar em contato. Caso você queira prosseguir mesmo assim, clique em 'OK'. Caso contrário, clique em 'Cancelar' e preencha o campo 'Telefone'.")) {
+                    txt_telefone.focus();
+                    return false;
+                }
+            }
+
+        }
+        return true;
+    }
+
+    function cadastra() {
+        if (consiste()) {
+            with (document.frm) {
+                arg = "txt_nm_requerente=" + escape(requerente.value);
+                arg = arg + "&txt_identidade=" + escape(rg.value);
+                arg = arg + "&txt_nm_iptu=" + escape(iptu.value);
+                arg = arg + "&hdd_cd_logesquina=" + escape("");
+                arg = arg + "&sel_end_logradouro=" + escape(rua.value);
+                arg = arg + "&txt_end_complemento=" + escape("");
+                arg = arg + "&txt_end_quadra=" + escape("");
+                arg = arg + "&txt_end_lote=" + escape("");
+                arg = arg + "&sel_end_setor=" + escape("");
+                arg = arg + "&txt_end_sem_bairro1=" + escape("");
+                arg = arg + "&txt_end_sem_bairro2=" + escape("");
+                arg = arg + "&sel_outros_estab=" + escape("");
+                arg = arg + "&txt_atividade=" + escape(atividade.value);
+                arg = arg + "&txt_telefone=" + escape(telefone.value);
+                arg = arg + "&txt_info1=" + escape("");
+                arg = arg + "&txt_info2=" + escape("");
+                arg = arg + "&sel_situacao=" + escape(situacaoLocal.value);
+                arg = arg + "&sel_local_referencia=" + escape("");
+                arg = arg + "&txt_casa1=" + escape("");
+                arg = arg + "&txt_casa2=" + escape("");
+                arg = arg + "&txt_casa3=" + escape("");
+            }
+            var baseUrl = "http://www.goiania.go.gov.br";
+            var url = "/sistemas/sinpo/asp/sinpo00100a2.asp?" + arg;
+        }
+    }
+
+
+</script>
+<script type="text/javascript">
+    function myFrame() {
+        
+        $("input[name='txt_nm_requerente']", parent.document).val("fernanda");
+
+    };
+</script>

@@ -1,0 +1,141 @@
+﻿<!DOCTYPE html>
+<html lang="en-us" id="extr-page">
+<head>
+    <meta charset="utf-8">
+    <title> Visão Web</title>
+    <meta name="description" content="">
+    <meta name="author" content="Renan Streit">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- #CSS Links -->
+    <!-- Basic Styles -->
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/SmartAdmin/css/bootstrap.min.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/SmartAdmin/css/font-awesome.min.css")">
+
+    <!-- SmartAdmin Styles : Caution! DO NOT change the order -->
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/SmartAdmin/css/smartadmin-production-plugins.min.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/SmartAdmin/css/smartadmin-production.min.css")">
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/SmartAdmin/css/smartadmin-skins.min.css")">
+
+    <!-- SmartAdmin RTL Support -->
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/SmartAdmin/css/smartadmin-rtl.min.css")">
+
+    <!-- We recommend you use "your_style.css" to override SmartAdmin
+         specific styles this will also ensure you retrain your customization with each SmartAdmin update.
+    <link rel="stylesheet" type="text/css" media="screen" href="css/your_style.css"> -->
+    <!-- Demo purpose only: goes with demo.js, you can delete this css when designing your own WebApp -->
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/SmartAdmin/css/demo.min.css")">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="@Url.Content("~/Content/Site.css")">
+
+    <!-- #FAVICONS -->
+    <link rel="shortcut icon" href="@Url.Content("~/Content/SmartAdmin/img/favicon/favicon.ico")" type="image/x-icon">
+    <link rel="icon" href="@Url.Content("~/Content/SmartAdmin/img/favicon/favicon.ico")" type="image/x-icon">
+
+    <!-- #GOOGLE FONT -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,300,400,700">
+
+    <!-- #APP SCREEN / ICONS -->
+    <!-- Specifying a Webpage Icon for Web Clip
+         Ref: https://developer.apple.com/library/ios/documentation/AppleApplications/Reference/SafariWebContent/ConfiguringWebApplications/ConfiguringWebApplications.html -->
+    <link rel="apple-touch-icon" href="@Url.Content("~/Content/SmartAdmin/img/splash/sptouch-icon-iphone.png")">
+    <link rel="apple-touch-icon" sizes="76x76" href="@Url.Content("~/Content/SmartAdmin/img/splash/touch-icon-ipad.png")">
+    <link rel="apple-touch-icon" sizes="120x120" href="@Url.Content("~/Content/SmartAdmin/img/splash/touch-icon-iphone-retina.png")">
+    <link rel="apple-touch-icon" sizes="152x152" href="@Url.Content("~/Content/SmartAdmin/img/splash/touch-icon-ipad-retina.png")">
+
+    <!-- iOS web-app metas : hides Safari UI Components and Changes Status Bar Appearance -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- Startup image for web apps -->
+    <link rel="apple-touch-startup-image" href="@Url.Content("~/Content/SmartAdmin/img/splash/ipad-landscape.png")" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
+    <link rel="apple-touch-startup-image" href="@Url.Content("~/Content/SmartAdmin/img/splash/ipad-portrait.png")" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
+    <link rel="apple-touch-startup-image" href="@Url.Content("~/Content/SmartAdmin/img/splash/iphone.png")" media="screen and (max-device-width: 320px)">
+
+</head>
+
+<body class="animated fadeInDown">
+
+    <header id="header">
+
+        <div id="logo-group">
+            <span id="logo"> <img src="@Url.Content("~/Content/SmartAdmin/img/logo.png")" alt="SmartAdmin"> </span>
+        </div>
+        <span id="extr-page-header-space"><a href="@Url.Action("Index", "Home")" class="btn btn-danger">Entrar</a> </span>
+        <span id="extr-page-header-space"><a href="@Url.Action("Registrar", "Home")" class="btn btn-danger">Registrar</a> </span>
+    </header>
+
+    <div id="main" role="main">
+
+        <!-- MAIN CONTENT -->
+        <div id="content" class="container">
+
+            <div class="row">
+
+                <h1 class="txt-color-red login-header-big">Sobre</h1>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et eros arcu. Morbi fringilla, mi suscipit molestie venenatis, mauris lectus pellentesque nisi, ut elementum augue velit in ligula. Nunc nec orci a velit auctor dapibus id ac purus. Proin ut dolor lorem. Sed placerat suscipit sagittis. Proin nunc metus, viverra id arcu eu, dapibus aliquet lacus. Vivamus luctus ornare egestas.</p>
+
+                <p>Nunc congue venenatis erat a vulputate. Nam pellentesque magna lorem, eu pretium felis varius a. Vivamus nibh ipsum, pharetra in nibh sit amet, pretium interdum quam. Ut vel justo interdum, cursus odio eget, convallis magna. Quisque vitae ante nulla. Suspendisse dui lorem, condimentum vitae suscipit ac, scelerisque eget tellus. Cras quis bibendum eros. Aliquam justo nulla, sodales maximus arcu sed, luctus tempor purus. Etiam suscipit turpis vel justo dictum convallis id id ipsum. Nulla non est sit amet dolor rutrum commodo sed sed ipsum. Duis felis leo, scelerisque et commodo non, accumsan vitae neque.</p>
+
+                <p>Quisque facilisis nisl non felis feugiat, vel laoreet massa euismod. Integer tincidunt, nibh a molestie elementum, eros quam gravida metus, vitae luctus augue neque sed sapien. Aenean vitae vestibulum diam, a convallis sapien. Sed id accumsan nulla. Cras id convallis turpis. Nullam id aliquet eros. Quisque feugiat orci eu felis condimentum, nec malesuada lacus aliquam. Vestibulum nulla nunc, dictum ut diam sed, consectetur tincidunt quam</p>.
+
+                <p>In nec nunc et mauris fringilla imperdiet. Phasellus ultrices sed est sed iaculis. Proin congue sit amet sapien in pretium. Nunc ut eros accumsan, commodo sem ac, rutrum massa. Nam hendrerit tortor sed venenatis rutrum. Proin ut ultrices velit. In sed nibh nec leo condimentum sagittis ac id nisi. Pellentesque urna ipsum, feugiat dictum egestas nec, porta ultricies mi. Curabitur dapibus ullamcorper magna, ut tincidunt est tincidunt a.</p>
+
+                <p>justo risus, tincidunt nec vulputate at, tincidunt id velit. Donec a elementum justo. Fusce eu mattis urna. Nunc a tellus a risus tincidunt venenatis. Cras vulputate laoreet nisi ac sollicitudin. Donec efficitur mauris dui. Suspendisse finibus nec lorem nec finibus. Nullam ultrices sollicitudin neque vitae viverra. Duis porttitor tellus luctus nisi maximus maximus. Donec ac bibendum sem. Nullam congue ultricies nisi, quis suscipit dui hendrerit ut. Curabitur suscipit at leo pretium pharetra. Morbi tortor lacus, euismod a pellentesque malesuada, interdum sit amet sem. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.</p>
+
+                <br />
+                <div>
+                    <a href="/" class="btn btn-danger btn-sm pull-right">Voltar</a>
+                </div>
+                <div class="clear clearfix"></div>
+                <hr />
+                <p>Visão Web - Empresa © @DateTime.Now.Year</p>
+
+            </div>
+            
+        </div>
+
+    </div>
+
+    <!--================================================== -->
+    <!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
+    <script src="@Url.Content("~/Content/SmartAdmin/js/plugin/pace/pace.min.js")"></script>
+
+    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script> if (!window.jQuery) { document.write('<script src="/Content/SmartAdmin/js/libs/jquery-2.1.1.min.js"><\/script>'); } </script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
+    <script> if (!window.jQuery.ui) { document.write('<script src="/Content/SmartAdmin/js/libs/jquery-ui-1.10.3.min.js"><\/script>'); } </script>
+
+    <script src="@Url.Content("~/Scripts/jquery.unobtrusive-ajax-custom.js")" type="text/javascript"></script>
+
+    <!-- IMPORTANT: APP CONFIG -->
+    <script src="@Url.Content("~/Content/SmartAdmin/js/app.config.js")"></script>
+
+    <!-- JS TOUCH : include this plugin for mobile drag / drop touch events
+    <script src="js/plugin/jquery-touch/jquery.ui.touch-punch.min.js"></script> -->
+    <!-- BOOTSTRAP JS -->
+    <script src="@Url.Content("~/Content/SmartAdmin/js/bootstrap/bootstrap.min.js")"></script>
+
+    <!-- JQUERY VALIDATE -->
+    <script src="@Url.Content("~/Content/SmartAdmin/js/plugin/jquery-validate/jquery.validate.min.js")"></script>
+
+    <!-- JQUERY MASKED INPUT -->
+    <script src="@Url.Content("~/Scripts/jquery.maskMoney.js")" type="text/javascript"></script>
+
+    <script src="@Url.Content("~/Content/SmartAdmin/js/plugin/masked-input/jquery.maskedinput.min.js")"></script>
+
+    <!--[if IE 8]>
+
+        <h1>Your browser is out of date, please update your browser by going to www.microsoft.com/download</h1>
+
+    <![endif]-->
+    <!-- MAIN APP JS FILE -->
+    <script src="@Url.Content("~/Content/SmartAdmin/js/app.min.js")"></script>
+
+    <script src="@Url.Content("~/Scripts/scripts.js")"></script>
+
+</body>
+</html>

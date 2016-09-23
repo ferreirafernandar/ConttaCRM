@@ -1,0 +1,27 @@
+﻿<nav>
+    <ul>
+        <li>
+            <a href="javascript:;" onclick="carregarPaginaAjax('@Url.Action("Index", "Dashboard")')" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
+        </li>
+        <li>
+            <a href="javascript:;" onclick="carregarPaginaAjax('@Url.Action("Index", "Loja")')"><i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent">Meus Produtos</span></a>
+        </li>
+        @*
+        <li>
+            <a href="javascript:;" onclick="carregarPaginaAjax('@Url.Action("Index", "MeusProdutos")')"><i class="fa fa-lg fa-fw fa-cube"></i> <span class="menu-item-parent">Meus Produtos</span></a>
+        </li>
+        *@
+        <li>
+            <a href="javascript:;" onclick="carregarPaginaAjax('@Url.Action("Index", "Fatura")')"><i class="fa fa-lg fa-fw fa-dollar"></i> <span class="menu-item-parent">Faturas</span></a>
+        </li>
+        <li>
+            <a href="javascript:;" onclick="carregarPaginaAjax('@Url.Action("Index", "Vinculado")')"><i class="fa fa-lg fa-fw fa-chain"></i> <span class="menu-item-parent">Vinculados</span></a>
+        </li>
+        <li>
+            <a href="javascript:;" onclick="carregarPaginaAjax('@Url.Action("Index", "Financeiro")')"><i class="fa fa-lg fa-fw fa-bar-chart-o"></i> <span class="menu-item-parent">Financeiro</span></a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Filemanager")" target="_blank"><i class="fa fa-lg fa-fw fa-file"></i> <span class="menu-item-parent">Gerenciador de Arquivos</span></a>
+        </li>
+    </ul>
+</nav>

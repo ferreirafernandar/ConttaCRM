@@ -1,0 +1,158 @@
+﻿@model UsuarioDTO
+
+<header>
+    Criar Conta
+</header>
+
+<fieldset>
+    @if (!string.IsNullOrWhiteSpace(ViewBag.AlertError))
+    {
+        <p class="text-danger">@ViewBag.AlertError</p><br />
+    }
+    <section>
+        <label class="input">
+            <i class="icon-append fa fa-user"></i>
+            @Html.TextBoxFor(model => model.NomeUsuario, new { placeholder = "Nome de usuário" })
+            <b class="tooltip tooltip-bottom-right">Usado para acessar o sistema</b>
+        </label>
+        @Html.ValidationMessageFor(model => model.NomeUsuario)
+    </section>
+
+    <section>
+        <label class="input">
+            <i class="icon-append fa fa-envelope"></i>
+            @Html.TextBoxFor(model => model.Email, new { placeholder = "Endereço de email" })
+            <b class="tooltip tooltip-bottom-right">Usado para verificar sua conta</b>
+        </label>
+        @Html.ValidationMessageFor(model => model.Email)
+    </section>
+
+    <section>
+        <label class="input">
+            <i class="icon-append fa fa-lock"></i>
+            <input type="password" name="senha" placeholder="Senha" id="senha">
+            <b class="tooltip tooltip-bottom-right">Não esqueça sua senha</b>
+        </label>
+        @Html.ValidationMessageFor(model => model.Senha)
+    </section>
+
+    <section>
+        <label class="input">
+            <i class="icon-append fa fa-lock"></i>
+            <input type="password" name="confirmacaoSenha" placeholder="Confirme a senha">
+            <b class="tooltip tooltip-bottom-right">Não esqueça sua senha</b>
+        </label>
+    </section>
+</fieldset>
+
+<fieldset>
+    <div class="row">
+        <section class="col col-6">
+            <label class="input">
+                @Html.TextBoxFor(model => model.Nome, new { placeholder = "Nome/Razão Social" })
+            </label>
+            @Html.ValidationMessageFor(model => model.Nome)
+        </section>
+        <section class="col col-6">
+            <label class="input">
+                @Html.TextBoxFor(model => model.Cpf, new { placeholder = "CPF/CNPJ" })
+            </label>
+            @Html.ValidationMessageFor(model => model.Cpf)
+        </section>
+    </div>
+
+    <div>
+        <section>
+            <label class="input">
+                @Html.TextBoxFor(model => model.Endereco, new { placeholder = "Endereço" })
+            </label>
+            @Html.ValidationMessageFor(model => model.Endereco)
+        </section>
+    </div>
+
+    <div>
+        <section>
+            <label class="input">
+                @Html.TextBoxFor(model => model.Complemento, new { placeholder = "Complemento" })
+            </label>
+            @Html.ValidationMessageFor(model => model.Complemento)
+        </section>
+    </div>
+
+    <div class="row">
+        <section class="col col-6">
+            <label class="input">
+                @Html.TextBoxFor(model => model.Numero, new { placeholder = "Número" })
+            </label>
+            @Html.ValidationMessageFor(model => model.Numero)
+        </section>
+        <section class="col col-6">
+            <label class="input">
+                @Html.TextBoxFor(model => model.Bairro, new { placeholder = "Bairro" })
+            </label>
+            @Html.ValidationMessageFor(model => model.Bairro)
+        </section>
+    </div>
+
+    <div class="row">
+        <section class="col col-6">
+            <label class="input">
+                @Html.TextBoxFor(model => model.Cidade, new { placeholder = "Cidade" })
+            </label>
+            @Html.ValidationMessageFor(model => model.Cidade)
+        </section>
+        <section class="col col-6">
+            <label class="select">
+                @Html.EnumDropDownListFor(model => model.Estado, "Estado")
+                <i></i>
+            </label>
+            @Html.ValidationMessageFor(model => model.Estado)
+        </section>
+    </div>
+
+    <div class="row">
+        <section class="col col-6">
+            <label class="input">
+                @Html.TextBoxFor(model => model.Cep, new { placeholder = "CEP", @class = "cep" })
+            </label>
+            @Html.ValidationMessageFor(model => model.Cep)
+        </section>
+        <section class="col col-6">
+            <label class="select">
+                @Html.EnumDropDownListFor(model => model.Sexo, "Sexo")
+                <i></i>
+            </label>
+            @Html.ValidationMessageFor(model => model.Sexo)
+        </section>
+    </div>
+
+    <div class="row">
+        <section class="col col-6">
+            <label class="input">
+                @Html.TextBoxFor(model => model.Telefone, new { placeholder = "Telefone", @class = "telefone" })
+            </label>
+            @Html.ValidationMessageFor(model => model.Telefone)
+        </section>
+        <section class="col col-6">
+            <label class="input">
+                @Html.TextBoxFor(model => model.Celular, new { placeholder = "Celular", @class = "telefone" })
+            </label>
+            @Html.ValidationMessageFor(model => model.Celular)
+        </section>
+    </div>
+    <section>
+        <label class="checkbox">
+            @Html.CheckBoxFor(model => model.Newsletter)
+            <i></i>Quero receber notícias e ofertas especiais
+        </label>
+        <label class="checkbox">
+            @Html.CheckBoxFor(model => model.Terms)
+            <i></i>Eu concordo com os <a href="#" data-toggle="modal" data-target="#myModal"> Termos e Condições </a>
+        </label>
+    </section>
+</fieldset>
+<footer>
+    <button type="submit" class="btn btn-primary">
+        Registrar
+    </button>
+</footer>
